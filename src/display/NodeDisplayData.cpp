@@ -14,12 +14,16 @@ namespace viewer {
 
 namespace display {
 
-NodeDisplayData::NodeDisplayData() : nodeSphere(new osg::Sphere(osg::Vec3(0,0,0), 1.0f)){
+using namespace cryomesh::components;
 
+NodeDisplayData::NodeDisplayData(const Node * nd) : node(nd) , nodeSphere( new osg::Sphere(osg::Vec3(0,0,0), 1.0f)){
+	this->update();
+	nodeSphere->setName(node->getUUIDString());
 }
 
 NodeDisplayData::~NodeDisplayData() {
-	// TODO Auto-generated destructor stub
+	const cryomesh::spacial::Point & pos = node->getPosition();
+	nodeSphere->setCenter( osg::Vec3f(pos.getX(), pos.getY(), pos.getZ()));
 }
 
 void NodeDisplayData::update(){

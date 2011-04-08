@@ -6,6 +6,7 @@
  */
 
 #include "ComponentDisplayData.h"
+#include <components/Node.h>
 
 #ifndef NODEDISPLAYDATA_H_
 #define NODEDISPLAYDATA_H_
@@ -18,12 +19,13 @@ namespace display {
 
 class NodeDisplayData : public ComponentDisplayData {
 public:
-	NodeDisplayData();
+	NodeDisplayData(const cryomesh::components::Node * nd);
 	virtual ~NodeDisplayData();
 	virtual void update();
 	virtual osg::ShapeDrawable * getDrawable();
 
 private:
+	const cryomesh::components::Node * node;
 	osg::Sphere * nodeSphere;
 };
 
