@@ -14,8 +14,7 @@ namespace viewer {
 
 namespace display {
 
-NodeDisplayData::NodeDisplayData() {
-	nodeSphere = new osg::Sphere(osg::Vec3(0,0,0), 1.0f);
+NodeDisplayData::NodeDisplayData() : nodeSphere(new osg::Sphere(osg::Vec3(0,0,0), 1.0f)){
 
 }
 
@@ -25,6 +24,11 @@ NodeDisplayData::~NodeDisplayData() {
 
 void NodeDisplayData::update(){
 	std::cout<<"NodeDisplayData::update: "<<""<<std::endl;
+}
+
+osg::ShapeDrawable * NodeDisplayData::getDrawable(){
+	osg::ShapeDrawable* nodeDrawable = new osg::ShapeDrawable(nodeSphere);
+	return nodeDrawable;
 }
 }//NAMESPACE
 

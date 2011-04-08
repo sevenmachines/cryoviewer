@@ -13,8 +13,7 @@ namespace viewer {
 
 namespace display {
 
-ComponentDisplayData::ComponentDisplayData() {
-	// TODO Auto-generated constructor stub
+ComponentDisplayData::ComponentDisplayData(){
 
 }
 

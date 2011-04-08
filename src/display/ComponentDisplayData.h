@@ -16,11 +16,12 @@ namespace viewer {
 
 namespace display {
 
-class ComponentDisplayData : public osg::ShapeDrawable {
+class ComponentDisplayData {
 public:
 	ComponentDisplayData();
 	virtual ~ComponentDisplayData();
 	virtual void update()=0;
+	virtual osg::ShapeDrawable * getDrawable()=0;
 };
 
 }
