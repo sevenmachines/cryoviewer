@@ -9,6 +9,7 @@
 #define COMPONENTDISPLAYDATA_H_
 
 #include <osg/ShapeDrawable>
+#include <boost/shared_ptr.hpp>
 
 namespace cryo {
 
@@ -21,7 +22,7 @@ public:
 	ComponentDisplayData();
 	virtual ~ComponentDisplayData();
 	virtual void update()=0;
-	virtual osg::ShapeDrawable * getDrawable()=0;
+	virtual boost::shared_ptr< osg::ShapeDrawable > getDrawable()=0;
 };
 
 }

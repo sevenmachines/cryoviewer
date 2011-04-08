@@ -7,6 +7,7 @@
 
 #include "ComponentDisplayData.h"
 #include <components/Node.h>
+#include <boost/shared_ptr.hpp>
 
 #ifndef NODEDISPLAYDATA_H_
 #define NODEDISPLAYDATA_H_
@@ -19,14 +20,14 @@ namespace display {
 
 class NodeDisplayData : public ComponentDisplayData {
 public:
-	NodeDisplayData(const cryomesh::components::Node * nd);
+	NodeDisplayData(const boost::shared_ptr< cryomesh::components::Node > nd);
 	virtual ~NodeDisplayData();
 	virtual void update();
-	virtual osg::ShapeDrawable * getDrawable();
+	virtual boost::shared_ptr< osg::ShapeDrawable > getDrawable();
 
 private:
-	const cryomesh::components::Node * node;
-	osg::Sphere * nodeSphere;
+	const boost::shared_ptr< cryomesh::components::Node  >node;
+	boost::shared_ptr< osg::Sphere > nodeSphere;
 };
 
 

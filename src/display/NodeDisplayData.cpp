@@ -16,8 +16,9 @@ namespace display {
 
 using namespace cryomesh::components;
 
-NodeDisplayData::NodeDisplayData(const Node * nd) : node(nd) , nodeSphere( new osg::Sphere(osg::Vec3(0,0,0), 1.0f)){
+NodeDisplayData::NodeDisplayData(const  boost::shared_ptr< cryomesh::components::Node > nd) : node(nd) {
 	this->update();
+	nodeSphere = boost::shared_ptr< osg::Sphere > ( new osg::Sphere(osg::Vec3(0,0,0), 1.0f));
 	nodeSphere->setName(node->getUUIDString());
 }
 
@@ -30,8 +31,8 @@ void NodeDisplayData::update(){
 	std::cout<<"NodeDisplayData::update: "<<""<<std::endl;
 }
 
-osg::ShapeDrawable * NodeDisplayData::getDrawable(){
-	osg::ShapeDrawable* nodeDrawable = new osg::ShapeDrawable(nodeSphere);
+boost::shared_ptr< osg::ShapeDrawable > NodeDisplayData::getDrawable(){
+	boost::shared_ptr< osg::ShapeDrawable > nodeDrawable (new osg::ShapeDrawable(nodeSphere.get()));
 	return nodeDrawable;
 }
 }//NAMESPACE
