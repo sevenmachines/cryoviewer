@@ -7,6 +7,7 @@
 
 #ifndef STATISTICSWINDOW_H_
 #define STATISTICSWINDOW_H_
+#include "DisplayWindow.h"
 
 namespace cryo {
 
@@ -14,7 +15,7 @@ namespace viewer {
 
 namespace display {
 
-class StatisticsWindow {
+class StatisticsWindow  : public DisplayWindow{
 public:
 	StatisticsWindow();
 	virtual ~StatisticsWindow();

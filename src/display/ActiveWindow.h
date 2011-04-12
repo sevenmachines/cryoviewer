@@ -8,13 +8,14 @@
 #ifndef ACTIVEWINDOW_H_
 #define ACTIVEWINDOW_H_
 
+#include "DisplayWindow.h"
 namespace cryo {
 
 namespace viewer {
 
 namespace display {
 
-class ActiveWindow {
+class ActiveWindow: public DisplayWindow {
 public:
 	ActiveWindow();
 	virtual ~ActiveWindow();

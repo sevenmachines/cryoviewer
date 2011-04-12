@@ -1,24 +1,24 @@
 /*
- * DisplayWindow.cpp
+ * NodeSphere.cpp
  *
- *  Created on: 8 Apr 2011
+ *  Created on: 12 Apr 2011
  *      Author: "SevenMachines <SevenMachines@yahoo.co.uk>"
  */
 
-#include "DisplayWindow.h"
+#include "NodeSphere.h"
 
 namespace cryo {
 
 namespace viewer {
 
-namespace display {
+namespace elements {
 
-DisplayWindow::DisplayWindow() {
+NodeSphere::NodeSphere(osg::Vec3  vec, float f) : osg::Sphere(vec, f) {
 	// TODO Auto-generated constructor stub
 
 }
 
-DisplayWindow::~DisplayWindow() {
+NodeSphere::~NodeSphere() {
 	// TODO Auto-generated destructor stub
 }
 

@@ -22,7 +22,7 @@ public:
 	ComponentDisplayData();
 	virtual ~ComponentDisplayData();
 	virtual void update()=0;
-	virtual boost::shared_ptr< osg::ShapeDrawable > getDrawable()=0;
+	virtual  boost::shared_ptr< osg::Shape > getShape()=0;
 };
 
 }

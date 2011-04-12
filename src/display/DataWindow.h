@@ -8,13 +8,15 @@
 #ifndef DATAWINDOW_H_
 #define DATAWINDOW_H_
 
+#include "DisplayWindow.h"
+
 namespace cryo {
 
 namespace viewer {
 
 namespace display {
 
-class DataWindow {
+class DataWindow  : public DisplayWindow{
 public:
 	DataWindow();
 	virtual ~DataWindow();

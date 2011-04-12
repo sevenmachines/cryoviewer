@@ -6,6 +6,7 @@
  */
 
 #include "ComponentDisplayData.h"
+#include "elements/NodeSphere.h"
 #include <components/Node.h>
 #include <boost/shared_ptr.hpp>
 
@@ -23,11 +24,11 @@ public:
 	NodeDisplayData(const boost::shared_ptr< cryomesh::components::Node > nd);
 	virtual ~NodeDisplayData();
 	virtual void update();
-	virtual boost::shared_ptr< osg::ShapeDrawable > getDrawable();
+	virtual boost::shared_ptr< osg::Shape > getShape();
 
 private:
 	const boost::shared_ptr< cryomesh::components::Node  >node;
-	boost::shared_ptr< osg::Sphere > nodeSphere;
+	boost::shared_ptr< elements::NodeSphere > nodeSphere;
 };
 
 
