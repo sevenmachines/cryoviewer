@@ -13,17 +13,21 @@ namespace viewer {
 
 namespace display {
 
-StatisticsWindow::StatisticsWindow() {
-	// TODO Auto-generated constructor stub
-
+StatisticsWindow::StatisticsWindow(const boost::shared_ptr< cryomesh::structures::Bundle > bun) : bundle(bun){
+	loadWindow("Data/statisticswindow.ui");
+	this->setTitle("Cryoviewer Statistics");
 }
 
 StatisticsWindow::~StatisticsWindow() {
-	// TODO Auto-generated destructor stub
 }
 
+void StatisticsWindow::updateData() {
+	std::cout<<"StructureWindow::updateData: "<<""<<std::endl;
+}
+void StatisticsWindow::initialise() {
+	std::cout<<"StructureWindow::initialise: "<<""<<std::endl;
 }
 
-}
-
-}
+}//NAMESPACE
+}//NAMESPACE
+}//NAMESPACE

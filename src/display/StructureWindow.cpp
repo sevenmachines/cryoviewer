@@ -17,6 +17,7 @@ StructureWindow::StructureWindow(const boost::shared_ptr<cryomesh::structures::B
 	bundle(bun) {
 	std::cout<<"StructureWindow::StructureWindow: "<<""<<std::endl;
 	loadWindow("Data/structurewindow.ui");
+	this->setTitle("Cryoviewer Structure");
 }
 
 StructureWindow::~StructureWindow() {
@@ -25,11 +26,9 @@ StructureWindow::~StructureWindow() {
 
 void StructureWindow::updateData() {
 	std::cout<<"StructureWindow::updateData: "<<""<<std::endl;
-	std::cout << "StructureWindow::updateData: " << "" << std::endl;
 }
 void StructureWindow::initialise() {
 	std::cout<<"StructureWindow::initialise: "<<""<<std::endl;
-	std::cout << "StructureWindow::initialise: " << "" << std::endl;
 }
 
 }//NAMESPACE

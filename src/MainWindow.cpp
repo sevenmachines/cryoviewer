@@ -20,10 +20,10 @@
 namespace cryo {
 namespace viewer {
 
-const std::string cryo::viewer::MainWindow::DATA_DIR = "Data";
-
 const std::string cryo::viewer::MainWindow::DEFAULT_CONFIG_FILE =
 		"/home/niall/Projects/Eclipse/cryomesh-cute/Data/basic-2c.config";
+const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE =
+		"Data/mainwindow.ui";
 
 MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);
@@ -35,10 +35,8 @@ MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	manager = boost::shared_ptr<cryomesh::manager::CryoManager>(new cryomesh::manager::CryoManager);
 	manager->create(filename);
 	try {
-		std::stringstream filepath;
-		filepath << cryo::viewer::MainWindow::DATA_DIR << "/" << "mainwindow.ui";
 		mainWindowBuilder = Gtk::Builder::create();
-		mainWindowBuilder->add_from_file(filepath.str());
+		mainWindowBuilder->add_from_file(MainWindow::DEFAULT_UI_FILE);
 		this->initialise();
 		Gtk::Main::run(*mainWindow);
 	} catch (const Glib::FileError& ex) {
@@ -82,13 +80,11 @@ void MainWindow::onMainWindowToggleButtonNodesClicked() {
 }
 
 void MainWindow::onMainWindowToggleButtonStructureClicked() {
-	std::cout << "MainWindow::mainWindowToggleButtonStructure: " << mainWindowToggleButtonStructure->get_active()
-			<< std::endl;
 	this->onMainWindowToggleButtonClicked<display::StructureWindow> (mainWindowToggleButtonStructure, structureWindow);
 }
 void MainWindow::onMainWindowToggleButtonStatisticsClicked() {
-	std::cout << "MainWindow::mainWindowToggleButtonStatistics: " << mainWindowToggleButtonStatistics->get_active()
-			<< std::endl;
+	this->onMainWindowToggleButtonClicked<display::StatisticsWindow> (mainWindowToggleButtonStatistics, statisticsWindow);
+
 }
 
 void MainWindow::onMainWindowToggleButtonVisualiseClicked() {
@@ -101,7 +97,6 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 
 template<class T>
 void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton, boost::shared_ptr<T> & display_window) {
-	std::cout << "MainWindow::mainWindowToggleButtonClicked: " << togglebutton->get_active() << std::endl;
 
 	if (togglebutton->get_active() == true) {
 		if (manager != 0) {

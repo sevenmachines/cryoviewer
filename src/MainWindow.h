@@ -61,6 +61,7 @@ public:
 	 * @var std::string
 	 */
 	static const std::string DEFAULT_CONFIG_FILE;
+	static const std::string DEFAULT_UI_FILE;
 
 protected:
 	Glib::RefPtr<Gtk::Builder> mainWindowBuilder;
