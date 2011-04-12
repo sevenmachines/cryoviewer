@@ -59,6 +59,8 @@ void MainWindow::initialise() {
 	mainWindowBuilder->get_widget("mainWindowToggleButtonVisualise", mainWindowToggleButtonVisualise);
 	mainWindowBuilder->get_widget("mainWindowToggleButtonRun", mainWindowToggleButtonRun);
 
+	mainWindowBuilder->get_widget("structureButtonImage", structureButtonImage);
+
 	// connect up togglebuttons
 	mainWindowToggleButtonNodes->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonNodesClicked));
@@ -71,6 +73,9 @@ void MainWindow::initialise() {
 	mainWindowToggleButtonRun->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonRunClicked));
 
+
+
+	Gtk::Settings::get_default()->property_gtk_button_images() = true;
 }
 
 void MainWindow::onMainWindowToggleButtonNodesClicked() {

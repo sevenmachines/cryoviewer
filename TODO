@@ -1,9 +1,7 @@
 CURRENT----------------------------------------------------------------------------------
 
-* Implement basic Node display
-* Implement simple Main initialisation from command line config
-* Implement simple gtk Main window to allow turning on/off displays
-* Implement demo of Structure display of node objects
+* Have statistics window show something
+* Have structure show some basic openscengraph stuff
 
 HIGH ----------------------------------------------------------------------------------------
 
@@ -16,3 +14,6 @@ LOW ----------------------------------------------------------------------------
 
 WISHLIST ----------------------------------------------------------------------------------
 
+* Implement simple Main initialisation from command line config (DONE)
+* Implement simple gtk Main window to allow turning on/off displays (DONE)
+* Implement demo of Structure display of node objects (DONE)

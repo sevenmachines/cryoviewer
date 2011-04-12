@@ -72,6 +72,7 @@ protected:
 	Gtk::ToggleButton * mainWindowToggleButtonVisualise;
 	Gtk::ToggleButton * mainWindowToggleButtonRun;
 
+	Gtk::Image * structureButtonImage;
 	/**
 	 * Template class to handle the toggle button signals for the range of similar DisplayWindow  classes
 	 *
