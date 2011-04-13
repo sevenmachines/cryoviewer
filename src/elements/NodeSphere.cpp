@@ -14,16 +14,15 @@ namespace viewer {
 namespace elements {
 
 NodeSphere::NodeSphere(osg::Vec3  vec, float f) : osg::Sphere(vec, f) {
-	// TODO Auto-generated constructor stub
-
+//	this->setColour(NodeSphere::DEFAULT_COLOUR);
 }
 
 NodeSphere::~NodeSphere() {
 	// TODO Auto-generated destructor stub
 }
 
-}
+}//NAMESPACE
 
-}
+}//NAMESPACE
 
-}
+}//NAMESPACE

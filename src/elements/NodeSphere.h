@@ -20,6 +20,8 @@ class NodeSphere : public osg::Sphere{
 public:
 	NodeSphere(osg::Vec3 vec, float f);
 	virtual ~NodeSphere();
+
+private:
 };
 
 }

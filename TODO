@@ -1,7 +1,9 @@
 CURRENT----------------------------------------------------------------------------------
 
-* Have statistics window show something
-* Have structure show some basic openscengraph stuff
+* Make statistics text display meaningful
+* Implement statistics osgpicking
+* Add cluster selector to StatisticsWindow
+* Add cluster visualiser to StatisticsWindow
 
 HIGH ----------------------------------------------------------------------------------------
 
@@ -17,3 +19,9 @@ WISHLIST -----------------------------------------------------------------------
 * Implement simple Main initialisation from command line config (DONE)
 * Implement simple gtk Main window to allow turning on/off displays (DONE)
 * Implement demo of Structure display of node objects (DONE)
+
+
+DONE ---------------------------------------------------------------------------------------
+
+* Have statistics window show something (DONE)
+* Have structure show some basic openscengraph stuff (DONE)

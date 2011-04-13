@@ -18,9 +18,9 @@ using namespace cryomesh::components;
 
 NodeDisplayData::NodeDisplayData(const boost::shared_ptr<cryomesh::components::Node> nd) :
 	node(nd) {
-	this->update();
-	nodeSphere = boost::shared_ptr< elements::NodeSphere >(new elements::NodeSphere(osg::Vec3(0, 0, 0), 1.0f));
+	nodeSphere = boost::shared_ptr<elements::NodeSphere>(new elements::NodeSphere(osg::Vec3(0, 0, 0), 1.0f));
 	nodeSphere->setName(node->getUUIDString());
+	this->update();
 }
 
 NodeDisplayData::~NodeDisplayData() {
@@ -31,7 +31,7 @@ void NodeDisplayData::update() {
 	nodeSphere->setCenter(osg::Vec3f(pos.getX(), pos.getY(), pos.getZ()));
 }
 
-boost::shared_ptr< osg::Shape > NodeDisplayData::getShape() {
+boost::shared_ptr<osg::Shape> NodeDisplayData::getShape() {
 	return nodeSphere;
 }
 }//NAMESPACE
