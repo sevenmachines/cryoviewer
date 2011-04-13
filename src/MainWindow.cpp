@@ -22,27 +22,33 @@ namespace viewer {
 
 const std::string cryo::viewer::MainWindow::DEFAULT_CONFIG_FILE =
 		"/home/niall/Projects/Eclipse/cryomesh-cute/Data/basic-2c.config";
-const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE =
-		"Data/mainwindow.ui";
+const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.ui";
 
 MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);
-	while (filename == "" || this->checkFileExists(filename) == false) {
+	if (filename == "" || this->checkFileExists(filename) == false) {
 		std::cout << "MainWindow: " << "File " << "'" << filename << "'" << " does not exist..." << std::endl;
 		filename = cryo::viewer::MainWindow::getFileChoice();
 	}
-	// create manager
-	manager = boost::shared_ptr<cryomesh::manager::CryoManager>(new cryomesh::manager::CryoManager);
-	manager->create(filename);
-	try {
-		mainWindowBuilder = Gtk::Builder::create();
-		mainWindowBuilder->add_from_file(MainWindow::DEFAULT_UI_FILE);
-		this->initialise();
-		Gtk::Main::run(*mainWindow);
-	} catch (const Glib::FileError& ex) {
-		std::cerr << "main: FileError: " << ex.what() << std::endl;
-	} catch (const Gtk::BuilderError& ex) {
-		std::cerr << "main: BuilderError: " << ex.what() << std::endl;
+	bool filetype_extension_found =( filename.find(".config") != std::string::npos);
+	if (filetype_extension_found ==false){
+		std::cout<<"MainWindow::MainWindow: "<<"ERROR: Config file does not have a '.config' extension, ignoring..."<<std::endl;
+	}
+	// if still no choice then dont bother starting
+	if (filename != "" && this->checkFileExists(filename) == true && filetype_extension_found) {
+		// create manager
+		manager = boost::shared_ptr<cryomesh::manager::CryoManager>(new cryomesh::manager::CryoManager);
+		manager->create(filename);
+		try {
+			mainWindowBuilder = Gtk::Builder::create();
+			mainWindowBuilder->add_from_file(MainWindow::DEFAULT_UI_FILE);
+			this->initialise();
+			Gtk::Main::run(*mainWindow);
+		} catch (const Glib::FileError& ex) {
+			std::cerr << "main: FileError: " << ex.what() << std::endl;
+		} catch (const Gtk::BuilderError& ex) {
+			std::cerr << "main: BuilderError: " << ex.what() << std::endl;
+		}
 	}
 }
 
@@ -73,8 +79,6 @@ void MainWindow::initialise() {
 	mainWindowToggleButtonRun->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonRunClicked));
 
-
-
 	Gtk::Settings::get_default()->property_gtk_button_images() = true;
 }
 
@@ -88,7 +92,8 @@ void MainWindow::onMainWindowToggleButtonStructureClicked() {
 	this->onMainWindowToggleButtonClicked<display::StructureWindow> (mainWindowToggleButtonStructure, structureWindow);
 }
 void MainWindow::onMainWindowToggleButtonStatisticsClicked() {
-	this->onMainWindowToggleButtonClicked<display::StatisticsWindow> (mainWindowToggleButtonStatistics, statisticsWindow);
+	this->onMainWindowToggleButtonClicked<display::StatisticsWindow> (mainWindowToggleButtonStatistics,
+			statisticsWindow);
 
 }
 
@@ -98,10 +103,15 @@ void MainWindow::onMainWindowToggleButtonVisualiseClicked() {
 }
 void MainWindow::onMainWindowToggleButtonRunClicked() {
 	std::cout << "MainWindow::mainWindowToggleButtonRun: " << mainWindowToggleButtonRun->get_active() << std::endl;
+	manager->runCycle();
+
+	// update all windows
+	statisticsWindow->update();
 }
 
 template<class T>
-void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton, boost::shared_ptr<T> & display_window) {
+void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton,
+		boost::shared_ptr<T> & display_window) {
 
 	if (togglebutton->get_active() == true) {
 		if (manager != 0) {
@@ -140,7 +150,6 @@ std::string MainWindow::getFileChoice() const {
 	}
 	default: {
 		std::cout << "Main::getFileChoice: " << "WARNING: Unexpected button clicked." << std::endl;
-		assert(false);
 		break;
 	}
 	}

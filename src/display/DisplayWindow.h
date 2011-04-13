@@ -65,16 +65,18 @@ public:
 	}
 
 protected:
+	Gtk::Window * mainWindow;
+	Glib::RefPtr<Gtk::Builder> builder;
+
 	virtual void updateData()=0;
 	virtual void initialise()=0;
 
-	void setTitle(std::string title){
+	void setTitle(std::string title) {
 		mainWindow->set_title(title);
 	}
 private:
 	bool activeState;
-	Gtk::Window * mainWindow;
-	Glib::RefPtr<Gtk::Builder> builder;
+
 };
 
 }
