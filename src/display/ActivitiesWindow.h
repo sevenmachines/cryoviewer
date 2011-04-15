@@ -11,6 +11,11 @@
 #include "DisplayWindow.h"
 #include "NodeActivityDrawingAreaPanel.h"
 #include "structures/Cluster.h"
+
+#include <gtkmm/checkbutton.h>
+#include <gtkmm/box.h>
+#include <gtkmm/label.h>
+
 namespace cryo {
 
 namespace viewer {
@@ -24,6 +29,9 @@ public:
 
 protected:
 	Gtk::VBox * activitiesVBox;
+	Gtk::HBox * activitiesWindowHBox;
+	Gtk::CheckButton * activitiesWindowCheckButtonSelectAll;
+	Gtk::Label * activitiesWindowLabelSummary;
 
 	virtual void updateData();
 	virtual void initialise();
@@ -36,9 +44,13 @@ protected:
 	boost::shared_ptr<NodeActivityDrawingAreaPanel> findNodePanelByNode(
 			const boost::shared_ptr<cryomesh::components::Node> & node);
 
+	void onActivitiesWindowCheckButtonSelectAll();
+
 private:
 	const boost::shared_ptr<cryomesh::structures::Cluster> cluster;
 	std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> > drawingAreas;
+
+	void selectAllNodes(bool b);
 
 };
 

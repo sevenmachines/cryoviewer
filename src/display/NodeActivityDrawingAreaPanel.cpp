@@ -27,18 +27,16 @@ bool NodeActivityDrawingAreaPanel::isActivated() const {
 void NodeActivityDrawingAreaPanel::setActivated(bool b) {
 	activated = b;
 	activityDrawingArea->showDrawingArea(this->isActivated());
+	activityCheckButton->set_active(b);
 }
 
 void NodeActivityDrawingAreaPanel::update() {
-	std::cout<<"NodeActivityDrawingAreaPanel::update: "<<""<<std::endl;
 	if (this->isActivated() == true) {
-		std::cout<<"NodeActivityDrawingAreaPanel::update: "<<"isActivated()"<<std::endl;
 		activityDrawingArea->update();
 	}
 }
 
 void NodeActivityDrawingAreaPanel::initialise() {
-	std::cout << "NodeActivityDrawingAreaPanel::initialise: " << "" << std::endl;
 	activityDrawingArea = boost::shared_ptr<NodeActivityDrawingArea>(new NodeActivityDrawingArea(node));
 	activityCheckButton = boost::shared_ptr<Gtk::CheckButton>(new Gtk::CheckButton);
 

@@ -1,6 +1,7 @@
 CURRENT----------------------------------------------------------------------------------
 
-* Fix non-display of activities graph for nodes 
+* Perform more tests on whether activity display is likely accurate
+
 * Sort out gl display, try fiddling with a camera
 * Implement statistics osgpicking
 * Add cluster selector to StatisticsWindow 
@@ -24,6 +25,7 @@ WISHLIST -----------------------------------------------------------------------
 
 DONE ---------------------------------------------------------------------------------------
 
+* Fix non-display of activities graph for nodes (DONE)
 * Import activity drawing areas, display per cluster,  have each  node disable-able (DONE)
 * Make statistics text display meaningful (Done)
 * Have statistics window show something (DONE)

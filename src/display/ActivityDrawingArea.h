@@ -39,6 +39,8 @@ void setActivated(bool b);
 protected:
 	//Override default signal handler:
 	virtual bool on_expose_event(GdkEventExpose* event);
+	virtual void invalidateWindow(void) ;
+
 protected:
 	Gdk::Color colour;
 	Gdk::Color fired_colour;

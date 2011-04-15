@@ -18,7 +18,7 @@ namespace display {
 
 const int ActivityDrawingArea::ACTIVITY_HEIGHT = 100;
 
-ActivityDrawingArea::ActivityDrawingArea(){
+ActivityDrawingArea::ActivityDrawingArea() {
 
 	//default colour is red
 	this->setMainColour(Gdk::Color("red"));
@@ -32,7 +32,7 @@ ActivityDrawingArea::ActivityDrawingArea(){
 	activeBackgroundColour = Gdk::Color("black");
 	inactiveBackgroundColour = Gdk::Color("grey");
 	this -> setBackgroundColour(inactiveBackgroundColour);
-colour = main_colour;
+	colour = main_colour;
 	//std::cout << "ActivityDrawingArea::ActivityDrawingArea()" << std::endl;
 	this->signal_expose_event().connect(sigc::mem_fun(*this, &ActivityDrawingArea::on_expose_event));
 	set_size_request(-1, ActivityDrawingArea::ACTIVITY_HEIGHT);
@@ -42,15 +42,15 @@ colour = main_colour;
 ActivityDrawingArea::~ActivityDrawingArea() {
 }
 
-bool ActivityDrawingArea::isActivated()const{
+bool ActivityDrawingArea::isActivated() const {
 	return activated;
 }
 
-void ActivityDrawingArea::setActivated(bool b){
-	activated=b;
-	if (b ==true){
-	this->setBackgroundColour(activeBackgroundColour);
-	}else{
+void ActivityDrawingArea::setActivated(bool b) {
+	activated = b;
+	if (b == true) {
+		this->setBackgroundColour(activeBackgroundColour);
+	} else {
 		this->setBackgroundColour(inactiveBackgroundColour);
 	}
 }
@@ -194,6 +194,11 @@ void ActivityDrawingArea::showDrawingArea(bool b) {
 	} else {
 		this->hide();
 	}
+}
+
+void ActivityDrawingArea::invalidateWindow() {
+	Gdk::Rectangle lRect = this->get_allocation();
+	this->get_window()->invalidate_rect(Gdk::Rectangle(0, 0, lRect.get_width(), lRect.get_height()), false);
 }
 
 }//NAMESPACE

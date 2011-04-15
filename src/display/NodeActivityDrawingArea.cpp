@@ -26,6 +26,7 @@ NodeActivityDrawingArea::~NodeActivityDrawingArea() {
 
 }
 void NodeActivityDrawingArea::update() {
+	this->showDrawingArea(this->isActivated());
 	if (this->isActivated() == true) {
 		points.clear();
 
@@ -39,7 +40,7 @@ void NodeActivityDrawingArea::update() {
 			++x;
 		}
 		node->setDebug(true);
-		std::cout<<"NodeActivityDrawingArea::update: "<<"Node: "<<*node<<std::endl;
+		std::cout << "NodeActivityDrawingArea::update: " << "Node: " << *node << std::endl;
 		node->setDebug(false);
 
 		//set colour
@@ -50,6 +51,7 @@ void NodeActivityDrawingArea::update() {
 		}
 
 	}
+	this->invalidateWindow();
 
 }
 

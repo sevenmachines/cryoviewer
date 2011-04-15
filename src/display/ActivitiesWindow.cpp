@@ -6,6 +6,7 @@
  */
 
 #include "ActivitiesWindow.h"
+#include <sstream>
 
 using namespace cryomesh::components;
 
@@ -36,11 +37,22 @@ void ActivitiesWindow::updateData() {
 			++it_drawingAreas;
 		}
 	}
+
+	std::stringstream ss;
+	ss << "Cycle: " << cryomesh::common::TimeKeeper::getTimeKeeper().getCycle();
+	activitiesWindowLabelSummary->set_text(ss.str());
 }
 
 void ActivitiesWindow::initialise() {
 	this->setTitle("Cryoviewer Activities");
 	builder->get_widget("activitiesVBox", activitiesVBox);
+	builder->get_widget("activitiesWindowHBox", activitiesWindowHBox);
+	builder->get_widget("activitiesWindowCheckButtonSelectAll", activitiesWindowCheckButtonSelectAll);
+	builder->get_widget("activitiesWindowLabelSummary", activitiesWindowLabelSummary);
+
+	activitiesWindowCheckButtonSelectAll->signal_clicked().connect(
+			sigc::mem_fun(*this, &ActivitiesWindow::onActivitiesWindowCheckButtonSelectAll));
+
 	mainWindow->set_size_request(400, 300);
 	this->updateNodeDisplay();
 }
@@ -144,6 +156,23 @@ boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::findNodePanelB
 	return found_panel;
 }
 
+void ActivitiesWindow::onActivitiesWindowCheckButtonSelectAll() {
+		this->selectAllNodes(activitiesWindowCheckButtonSelectAll->get_active() );
+}
+
+void ActivitiesWindow::selectAllNodes(bool b) {
+	// forall in drawingAreas
+	{
+		std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> >::iterator it_drawingAreas =
+				drawingAreas.begin();
+		const std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> >::const_iterator
+				it_drawingAreas_end = drawingAreas.end();
+		while (it_drawingAreas != it_drawingAreas_end) {
+			it_drawingAreas->second->setActivated(b);
+			++it_drawingAreas;
+		}
+	}
+}
 }//NAMESPACE
 }//NAMESPACE
 }//NAMESPACE
