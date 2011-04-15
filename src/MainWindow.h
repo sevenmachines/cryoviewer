@@ -55,6 +55,10 @@ public:
 	 */
 	void onMainWindowToggleButtonRunClicked();
 
+	bool onDeleteEvent(GdkEventAny *) ;
+
+	void processPendingEvents();
+
 	/**
 	 * The default config file to use if needed
 	 *
@@ -71,7 +75,8 @@ protected:
 	Gtk::ToggleButton * mainWindowToggleButtonStatistics;
 	Gtk::ToggleButton * mainWindowToggleButtonVisualise;
 	Gtk::ToggleButton * mainWindowToggleButtonRun;
-
+	Gtk::SpinButton * mainWindowRunSpinButton;
+	Gtk::ProgressBar * mainWindowProgressBar;
 	Gtk::Image * structureButtonImage;
 	/**
 	 * Template class to handle the toggle button signals for the range of similar DisplayWindow  classes

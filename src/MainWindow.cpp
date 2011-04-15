@@ -15,6 +15,9 @@
 
 #include <iostream>
 
+#include <gtkmm/gl/init.h>
+#include <gtkmm/gl/version.h>
+
 #include <gtkmm/builder.h>
 
 namespace cryo {
@@ -26,13 +29,17 @@ const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.u
 
 MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);
+	//init gl
+	Gtk::GL::init(argc, argv);
+
 	if (filename == "" || this->checkFileExists(filename) == false) {
 		std::cout << "MainWindow: " << "File " << "'" << filename << "'" << " does not exist..." << std::endl;
 		filename = cryo::viewer::MainWindow::getFileChoice();
 	}
-	bool filetype_extension_found =( filename.find(".config") != std::string::npos);
-	if (filetype_extension_found ==false){
-		std::cout<<"MainWindow::MainWindow: "<<"ERROR: Config file does not have a '.config' extension, ignoring..."<<std::endl;
+	bool filetype_extension_found = (filename.find(".config") != std::string::npos);
+	if (filetype_extension_found == false) {
+		std::cout << "MainWindow::MainWindow: "
+				<< "ERROR: Config file does not have a '.config' extension, ignoring..." << std::endl;
 	}
 	// if still no choice then dont bother starting
 	if (filename != "" && this->checkFileExists(filename) == true && filetype_extension_found) {
@@ -64,6 +71,8 @@ void MainWindow::initialise() {
 	mainWindowBuilder->get_widget("mainWindowToggleButtonStatistics", mainWindowToggleButtonStatistics);
 	mainWindowBuilder->get_widget("mainWindowToggleButtonVisualise", mainWindowToggleButtonVisualise);
 	mainWindowBuilder->get_widget("mainWindowToggleButtonRun", mainWindowToggleButtonRun);
+	mainWindowBuilder->get_widget("mainWindowRunSpinButton", mainWindowRunSpinButton);
+	mainWindowBuilder->get_widget("mainWindowProgressBar", mainWindowProgressBar);
 
 	mainWindowBuilder->get_widget("structureButtonImage", structureButtonImage);
 
@@ -78,6 +87,8 @@ void MainWindow::initialise() {
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonVisualiseClicked));
 	mainWindowToggleButtonRun->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonRunClicked));
+
+	mainWindow->signal_delete_event().connect(sigc::mem_fun(*this, &MainWindow::onDeleteEvent));
 
 	Gtk::Settings::get_default()->property_gtk_button_images() = true;
 }
@@ -102,11 +113,31 @@ void MainWindow::onMainWindowToggleButtonVisualiseClicked() {
 			<< std::endl;
 }
 void MainWindow::onMainWindowToggleButtonRunClicked() {
-	std::cout << "MainWindow::mainWindowToggleButtonRun: " << mainWindowToggleButtonRun->get_active() << std::endl;
-	manager->runCycle();
+	const int cycle_count = mainWindowRunSpinButton->get_value_as_int();
+	if (mainWindowToggleButtonRun->get_active()) {
+		mainWindowProgressBar->set_fraction(0);
+		for (int i = 0; i < cycle_count && mainWindowToggleButtonRun->get_active(); i++) {
+			manager->runCycle();
+			double fraction_complete = static_cast<double> (i + 1) / static_cast<double> (cycle_count);
+			mainWindowProgressBar->set_fraction(fraction_complete);
+			// update all windows
+			if (statisticsWindow != 0) {
+				statisticsWindow->update();
+			}
+			// update all windows
+			if (structureWindow != 0) {
+				structureWindow->update();
+			}
+			// update all windows
+			if (dataWindow != 0) {
+				dataWindow->update();
+			}
 
-	// update all windows
-	statisticsWindow->update();
+			this->processPendingEvents();
+		}
+		mainWindowToggleButtonRun->set_active(false);
+	}
+
 }
 
 template<class T>
@@ -119,7 +150,6 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 				display_window = boost::shared_ptr<T>(new T(manager->getBundle()));
 			}
 			display_window->activate();
-			display_window->update();
 
 		}
 	} else if (display_window != 0) {
@@ -127,6 +157,35 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 	}
 }
 
+void MainWindow::processPendingEvents() {
+	// allow gui to process all events
+	mainWindow->queue_draw();
+	while (Gtk::Main::events_pending()) {
+		Gtk::Main::iteration();
+	}
+}
+
+bool MainWindow::onDeleteEvent(GdkEventAny *) {
+	// check we really want to quit
+	Gtk::MessageDialog dialog("Are you sure you want to quit");
+	dialog.set_transient_for(*mainWindow);
+
+	//Add response buttons the the dialog:
+	dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	//	dialog.add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+	int result = dialog.run();
+
+	//Handle the response:
+	if (result == Gtk::RESPONSE_OK) {
+		std::cout << "MainWindow::onDeleteEvent: " << "TODO: Check save" << std::endl;
+		Gtk::Main::quit();
+		return true;
+	} else if (result == Gtk::RESPONSE_CANCEL) {
+		return true;
+	}
+
+	return false;
+}
 std::string MainWindow::getFileChoice() const {
 
 	std::string filename = "";

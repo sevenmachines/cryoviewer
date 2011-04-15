@@ -1,8 +1,9 @@
 CURRENT----------------------------------------------------------------------------------
 
-* Make statistics text display meaningful
+* Fix non-display of activities graph for nodes 
+* Sort out gl display, try fiddling with a camera
 * Implement statistics osgpicking
-* Add cluster selector to StatisticsWindow
+* Add cluster selector to StatisticsWindow 
 * Add cluster visualiser to StatisticsWindow
 
 HIGH ----------------------------------------------------------------------------------------
@@ -23,5 +24,7 @@ WISHLIST -----------------------------------------------------------------------
 
 DONE ---------------------------------------------------------------------------------------
 
+* Import activity drawing areas, display per cluster,  have each  node disable-able (DONE)
+* Make statistics text display meaningful (Done)
 * Have statistics window show something (DONE)
 * Have structure show some basic openscengraph stuff (DONE)

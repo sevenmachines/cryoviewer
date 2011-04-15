@@ -10,8 +10,14 @@
 
 #include "DisplayWindow.h"
 #include "structures/Bundle.h"
+#include "structures/Cluster.h"
 #include "components/NodeMap.h"
+#include "StructureGLDrawingArea.h"
+#include "ActivitiesWindow.h"
+
 #include <gtkmm/button.h>
+#include <gtkmm/togglebutton.h>
+#include <gtkmm/box.h>
 #include <string>
 #include <osg/Group>
 #include <osgViewer/Viewer>
@@ -29,17 +35,18 @@ public:
 	StructureWindow(const boost::shared_ptr<cryomesh::structures::Bundle> bun);
 	virtual ~StructureWindow();
 
-	bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa);
-
-	virtual void pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea);
-
 	void setLabel(const std::string& name);
 
 protected:
 
-	Gtk::Button * statisticsVisualiseButton;
+	Gtk::Button * structureVisualiseButton;
+	Gtk::VBox * structureVBox;
+	Gtk::ToggleButton * structureActivitiesToggleButton;
+	StructureGLDrawingArea * structureDrawingArea;
+	boost::shared_ptr< ActivitiesWindow > activitiesWindow;
 
-	void onStatisticsVisualiseButtonClicked();
+	void onStructureVisualiseButtonClicked();
+	void onStructureActivitiesToggleButtonClicked();
 
 	virtual void updateData();
 	virtual void initialise();
@@ -54,6 +61,8 @@ protected:
 private:
 	const boost::shared_ptr<cryomesh::structures::Bundle> bundle;
 	boost::shared_ptr<cryomesh::components::Node> selectedNode;
+	boost::shared_ptr<cryomesh::structures::Cluster> selectedCluster;
+
 	osg::ref_ptr<osgText::Text>  displayText;
 };
 

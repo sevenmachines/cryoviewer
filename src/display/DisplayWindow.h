@@ -43,22 +43,24 @@ public:
 
 	}
 	void update() {
-		std::cout << "DisplayWindow::update: " << "" << std::endl;
 		if (this->isActive() == true) {
 			this->updateData();
 		}
 	}
 	virtual void activate() {
+		activeState = true;
 		if (mainWindow != 0) {
+			std::cout << "DisplayWindow::activate: " << "show" << std::endl;
+			this->update();
 			mainWindow->show();
 		}
-		activeState = true;
 	}
 	virtual void deactivate() {
+		activeState = false;
 		if (mainWindow != 0) {
+			std::cout << "DisplayWindow::activate: " << "hide" << std::endl;
 			mainWindow->hide();
 		}
-		activeState = false;
 	}
 	bool isActive() {
 		return activeState;
