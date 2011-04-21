@@ -30,7 +30,10 @@ ActivityDrawingArea::ActivityDrawingArea() {
 	// backgrounds
 
 	activeBackgroundColour = Gdk::Color("black");
-	inactiveBackgroundColour = Gdk::Color("grey");
+	inactiveBackgroundColour = Gdk::Color("grey20");
+	primaryInputBackgroundColour = Gdk::Color("grey10");
+	primaryOutputBackgroundColour = Gdk::Color("grey5");
+
 	this -> setBackgroundColour(inactiveBackgroundColour);
 	colour = main_colour;
 	//std::cout << "ActivityDrawingArea::ActivityDrawingArea()" << std::endl;
@@ -50,6 +53,10 @@ void ActivityDrawingArea::setActivated(bool b) {
 	activated = b;
 	if (b == true) {
 		this->setBackgroundColour(activeBackgroundColour);
+		if (this->get_window()!=0){
+			this->invalidateWindow();
+		}
+		//this->update();
 	} else {
 		this->setBackgroundColour(inactiveBackgroundColour);
 	}

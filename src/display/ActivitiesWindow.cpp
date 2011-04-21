@@ -16,7 +16,7 @@ namespace display {
 
 ActivitiesWindow::ActivitiesWindow(const boost::shared_ptr<cryomesh::structures::Cluster> clus) :
 	cluster(clus) {
-	loadWindow("Data/activitieswindow.ui");
+	loadWindow("Data/activitieswindow.glade");
 	this->initialise();
 	mainWindow->show_all();
 }
@@ -74,7 +74,18 @@ void ActivitiesWindow::updateNodeDisplay() {
 
 			//if node doesnt exist then add it
 			if (found_panel == 0) {
-				this->addNode(it_all_nodes->second);
+
+				boost::shared_ptr<NodeActivityDrawingAreaPanel> panel = this->addNode(it_all_nodes->second);
+
+				// check if node is primary input/output
+
+				if (it_all_nodes->second->isPrimaryInputAttachedNode() ==true){
+					std::cout<<"ActivitiesWindow::updateNodeDisplay: "<<"isPrimaryInputAttachedNode"<<std::endl;
+					panel->setAsPrimaryInput();
+				}else if (it_all_nodes->second->isPrimaryOutputAttachedNode() ==true){
+					panel->setAsPrimaryOutput();
+					std::cout<<"ActivitiesWindow::updateNodeDisplay: "<<"isPrimaryOutputAttachedNode"<<std::endl;
+				}
 				++count_added;
 			} else {
 				// if it does then delete it from the copy of drawing areas
@@ -114,10 +125,11 @@ void ActivitiesWindow::updateNodeDisplay() {
 
 }
 
-void ActivitiesWindow::addNode(const boost::shared_ptr<cryomesh::components::Node> & node) {
+boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(const boost::shared_ptr<cryomesh::components::Node> & node) {
 	boost::shared_ptr<NodeActivityDrawingAreaPanel> panel(new NodeActivityDrawingAreaPanel(node));
 	drawingAreas[node->getUUID()] = panel;
 	activitiesVBox->pack_end(*panel);
+	return panel;
 }
 
 void ActivitiesWindow::removeNode(const boost::uuids::uuid & uuid) {

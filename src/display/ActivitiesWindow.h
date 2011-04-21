@@ -38,7 +38,7 @@ protected:
 
 	virtual void updateNodeDisplay();
 
-	virtual void addNode(const boost::shared_ptr< cryomesh::components::Node> & node);
+	virtual boost::shared_ptr<NodeActivityDrawingAreaPanel> addNode(const boost::shared_ptr< cryomesh::components::Node> & node);
 	virtual void removeNode(const boost::uuids::uuid & uuid);
 	virtual void removeNode(const boost::shared_ptr< cryomesh::components::Node> & node);
 	boost::shared_ptr<NodeActivityDrawingAreaPanel> findNodePanelByNode(

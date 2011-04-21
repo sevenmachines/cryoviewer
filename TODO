@@ -1,7 +1,8 @@
 CURRENT----------------------------------------------------------------------------------
 
 * Perform more tests on whether activity display is likely accurate
-
+	- Make primary nodes backgrounds diferent
+	 
 * Sort out gl display, try fiddling with a camera
 * Implement statistics osgpicking
 * Add cluster selector to StatisticsWindow 

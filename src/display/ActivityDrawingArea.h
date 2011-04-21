@@ -49,6 +49,8 @@ protected:
 	Gdk::Color backgroundColour;
 	Gdk::Color activeBackgroundColour;
 	Gdk::Color inactiveBackgroundColour;
+	Gdk::Color primaryInputBackgroundColour;
+	Gdk::Color primaryOutputBackgroundColour;
 
 	std::map<double, double> points;
 	std::map<double, double> last_points;

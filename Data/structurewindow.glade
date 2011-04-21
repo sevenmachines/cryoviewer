@@ -30,9 +30,6 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="GtkToggleButton" id="structureActivitiesToggleButton">
                 <property name="label" translatable="yes">Activities</property>
                 <property name="visible">True</property>
@@ -45,6 +42,9 @@
                 <property name="right_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>

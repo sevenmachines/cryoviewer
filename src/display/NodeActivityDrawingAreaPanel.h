@@ -9,6 +9,7 @@
 #define NODEACTIVITYDRAWINGAREAPANEL_H_
 
 #include "NodeActivityDrawingArea.h"
+
 #include <gtkmm/box.h>
 #include <gtkmm/checkbutton.h>
 #include <gtkmm/label.h>
@@ -22,7 +23,8 @@ class NodeActivityDrawingAreaPanel : public Gtk::HBox{
 public:
 	NodeActivityDrawingAreaPanel(const boost::shared_ptr< cryomesh::components::Node > & nd);
 	virtual ~NodeActivityDrawingAreaPanel();
-
+	void setAsPrimaryInput();
+	void setAsPrimaryOutput();
 	bool isActivated()const;
 	void setActivated(bool b);
 	void update();
@@ -39,10 +41,13 @@ protected:
 
 	void onActivityCheckButtonClicked() ;
 
+	static int ids;
+	static int getIds();
 
 private:
 	const boost::shared_ptr< cryomesh::components::Node > node;
 	bool activated;
+	int id;
 };
 
 }

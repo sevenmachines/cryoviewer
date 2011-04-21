@@ -25,7 +25,9 @@ class NodeActivityDrawingArea: public ActivityDrawingArea {
 public:
 	NodeActivityDrawingArea(const boost::shared_ptr< cryomesh::components::Node> & nd );
 	virtual ~NodeActivityDrawingArea();
-	void update();
+	void setAsPrimaryInput();
+	void setAsPrimaryOutput();
+void update();
 protected:
 	virtual 	void drawText();
 	virtual void  drawAxis();

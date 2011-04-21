@@ -24,8 +24,8 @@ namespace cryo {
 namespace viewer {
 
 const std::string cryo::viewer::MainWindow::DEFAULT_CONFIG_FILE =
-		"/home/niall/Projects/Eclipse/cryomesh-cute/Data/basic-2c.config";
-const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.ui";
+		"/home/niall/Projects/Eclipse/cryomesh-cute/TestData/basic-2c.config";
+const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.glade";
 
 MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);

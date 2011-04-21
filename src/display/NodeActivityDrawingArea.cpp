@@ -22,9 +22,20 @@ NodeActivityDrawingArea::NodeActivityDrawingArea(const boost::shared_ptr<cryomes
 	node(nd) {
 }
 
+
 NodeActivityDrawingArea::~NodeActivityDrawingArea() {
 
 }
+
+void NodeActivityDrawingArea::setAsPrimaryInput(){
+	this->activeBackgroundColour = primaryInputBackgroundColour;
+	this->setBackgroundColour(activeBackgroundColour);
+}
+void NodeActivityDrawingArea::setAsPrimaryOutput(){
+	this->activeBackgroundColour = primaryOutputBackgroundColour;
+	this->setBackgroundColour(activeBackgroundColour);
+}
+
 void NodeActivityDrawingArea::update() {
 	this->showDrawingArea(this->isActivated());
 	if (this->isActivated() == true) {
@@ -35,8 +46,8 @@ void NodeActivityDrawingArea::update() {
 		int x = 0;
 		for (Cycle i = current_cycle; i < current_cycle + MAX_FUTURE_TICKS; i++) {
 			points[x] = node->getActivity(i);
-			std::cout << "NodeActivityDrawingArea::update: " << i << " < " << current_cycle + MAX_FUTURE_TICKS
-					<< " activity: " << points[x] << std::endl;
+			//std::cout << "NodeActivityDrawingArea::update: " << i << " < " << current_cycle + MAX_FUTURE_TICKS
+			//<< " activity: " << points[x] << std::endl;
 			++x;
 		}
 		node->setDebug(true);

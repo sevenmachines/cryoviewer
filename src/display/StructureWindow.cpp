@@ -29,7 +29,7 @@ StructureWindow::StructureWindow(const boost::shared_ptr<cryomesh::structures::B
 
 	displayText = osg::ref_ptr<osgText::Text>(new osgText::Text);
 	displayText->setText("GOD HELP US ALL!!");
-	loadWindow("Data/structurewindow.ui");
+	loadWindow("Data/structurewindow.glade");
 	this->setTitle("Cryoviewer Structure");
 }
 
