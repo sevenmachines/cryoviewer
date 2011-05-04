@@ -1,7 +1,8 @@
 CURRENT----------------------------------------------------------------------------------
 
 * Finish connections viewing stuff
-
+	- Alter connections drawing area to actual draw connection data (impulses superimposed on connection length)
+	
 * Perform more tests on whether activity display is likely accurate
 	- Make primary nodes backgrounds diferent
 	 
