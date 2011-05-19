@@ -5,6 +5,7 @@
 	<projects>
 		<project>cryomesh</project>
 		<project>cryomesh-common</project>
+		<project>cryoviewer-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

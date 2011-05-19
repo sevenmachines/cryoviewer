@@ -73,6 +73,7 @@ void MainWindow::initialise() {
 	mainWindowBuilder->get_widget("mainWindowToggleButtonRun", mainWindowToggleButtonRun);
 	mainWindowBuilder->get_widget("mainWindowRunSpinButton", mainWindowRunSpinButton);
 	mainWindowBuilder->get_widget("mainWindowProgressBar", mainWindowProgressBar);
+	mainWindowBuilder->get_widget("mainWindowDebugEnabledCheckButton", mainWindowDebugEnabledCheckButton);
 
 	mainWindowBuilder->get_widget("structureButtonImage", structureButtonImage);
 
@@ -87,6 +88,9 @@ void MainWindow::initialise() {
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonVisualiseClicked));
 	mainWindowToggleButtonRun->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonRunClicked));
+
+	mainWindowDebugEnabledCheckButton->signal_clicked().connect(
+			sigc::mem_fun(*this, &MainWindow::onMainWindowDebugEnabledCheckButtonClicked));
 
 	mainWindow->signal_delete_event().connect(sigc::mem_fun(*this, &MainWindow::onDeleteEvent));
 
@@ -155,6 +159,13 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 	} else if (display_window != 0) {
 		display_window->deactivate();
 	}
+}
+
+void MainWindow::onMainWindowDebugEnabledCheckButtonClicked() {
+	bool enable_debug = mainWindowDebugEnabledCheckButton->get_active() == true;
+	std::cout<<"MainWindow::onMainWindowDebugEnabledCheckButtonClicked: "<<enable_debug<<std::endl;
+
+	this->manager->getMutableBundle()->enableDebug(enable_debug);
 }
 
 void MainWindow::processPendingEvents() {

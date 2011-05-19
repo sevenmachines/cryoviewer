@@ -51,6 +51,11 @@ public:
 	void onMainWindowToggleButtonVisualiseClicked();
 
 	/**
+	 * Signal handler for when enable debug check button is clicked
+	 */
+	void onMainWindowDebugEnabledCheckButtonClicked();
+
+	/**
 	 * Signal handler for when run toggle button is clicked
 	 */
 	void onMainWindowToggleButtonRunClicked();
@@ -78,6 +83,7 @@ protected:
 	Gtk::SpinButton * mainWindowRunSpinButton;
 	Gtk::ProgressBar * mainWindowProgressBar;
 	Gtk::Image * structureButtonImage;
+	Gtk::CheckButton * mainWindowDebugEnabledCheckButton;
 	/**
 	 * Template class to handle the toggle button signals for the range of similar DisplayWindow  classes
 	 *
