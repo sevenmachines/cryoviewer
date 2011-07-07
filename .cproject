@@ -24,16 +24,17 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.100630140" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1260698900" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
 								<option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1771311476" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.exe.debug.option.debugging.level.742009636" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.default" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.other.other.1398493333" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++0x `pkg-config --cflags gtk+-2.0 gtkglextmm-1.2 gtkmm-2.4 openscenegraph`" valueType="string"/>
+								<option id="gnu.cpp.compiler.exe.debug.option.debugging.level.742009636" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.other.other.1398493333" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++0x `pkg-config --cflags gtk+-2.0 glibmm-2.4 gtkglextmm-1.2 gtkmm-2.4 openscenegraph`" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1473531845" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryoviewer-common/src}&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/include/gtkglextmm-1.2"/>
 									<listOptionValue builtIn="false" value="/usr/include/gtkmm-2.4"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh-common/src}&quot;"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.debugging.prof.300069145" name="Generate prof information (-p)" superClass="gnu.cpp.compiler.option.debugging.prof" value="true" valueType="boolean"/>
+								<option id="gnu.cpp.compiler.option.debugging.gprof.1809557023" name="Generate gprof information (-pg)" superClass="gnu.cpp.compiler.option.debugging.gprof" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1109302818" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1499344681" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
@@ -48,14 +49,14 @@
 									<listOptionValue builtIn="false" value="cryomesh-common"/>
 									<listOptionValue builtIn="false" value="gmpxx"/>
 									<listOptionValue builtIn="false" value="gmp"/>
-									<listOptionValue builtIn="false" value="cryoviewer-common"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.479875162" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh-common/Debug}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryoviewer-common/Debug}&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.flags.1153070389" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-std=c++0x `pkg-config --libs gtkmm-2.4 openscenegraph gtk+-2.0  gtkglextmm-1.2`" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.1153070389" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-std=c++0x `pkg-config --libs gtkmm-2.4 openscenegraph gtk+-2.0  glibmm-2.4  gtkglextmm-1.2`" valueType="string"/>
+								<option id="gnu.cpp.link.option.debugging.prof.1557336714" name="Generate prof information (-p)" superClass="gnu.cpp.link.option.debugging.prof" value="true" valueType="boolean"/>
+								<option id="gnu.cpp.link.option.debugging.gprof.1846888924" name="Generate gprof information (-pg)" superClass="gnu.cpp.link.option.debugging.gprof" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1278758034" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -519,7 +520,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1595222800" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 								<option id="gnu.cpp.compiler.exe.release.option.optimization.level.17853224" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.exe.release.option.debugging.level.204062381" name="Debug Level" superClass="gnu.cpp.compiler.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.other.other.267367642" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++0x `pkg-config --cflags gtkmm-2.4 openscenegraph`" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.other.other.267367642" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -std=c++0x `pkg-config --cflags gtk+-2.0 glibmm-2.4 gtkglextmm-1.2 gtkmm-2.4 openscenegraph`" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1234829551" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryoviewer-common/src}&quot;"/>
@@ -547,9 +548,8 @@
 								<option id="gnu.cpp.link.option.paths.1767908160" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh-common/Release}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryoviewer-common/Debug}&quot;"/>
 								</option>
-								<option id="gnu.cpp.link.option.flags.882278256" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-std=c++0x `pkg-config --libs gtkmm-2.4 openscenegraph`" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.882278256" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-std=c++0x `pkg-config --libs gtkmm-2.4 openscenegraph gtk+-2.0  glibmm-2.4  gtkglextmm-1.2`" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.248631392" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
