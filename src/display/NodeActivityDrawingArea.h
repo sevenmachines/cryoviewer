@@ -30,6 +30,7 @@ public:
 protected:
 	virtual void drawText();
 	virtual void drawAxis();
+	virtual bool on_expose_event(GdkEventExpose* event) ;
 	void setAsPrimaryInput();
 	void setAsPrimaryOutput();
 

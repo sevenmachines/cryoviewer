@@ -5,6 +5,8 @@
  *      Author: "SevenMachines <SevenMachines@yahoo.co.uk>"
  */
 
+//#define CONNECTIONACTIVITYPANEL_DEBUG
+
 #include "ConnectionActivityPanel.h"
 #include <gtkmm/label.h>
 
@@ -100,13 +102,14 @@ void ConnectionActivityPanel::setAsPrimaryOutput() {
 void ConnectionActivityPanel::onActivityCheckButtonClicked() {
 	//std::cout << "ConnectionActivityPanel::onActivityCheckButtonClicked: " << "" << std::endl;
 	if (activityCheckButton->get_active() == true) {
-		//std::cout << "ConnectionActivityPanel::onActivityCheckButtonClicked: " << "TRUE" << std::endl;
+#ifdef CONNECTIONACTIVITYPANEL_DEBUG
+		std::cout << "ConnectionActivityPanel::onActivityCheckButtonClicked: " << "TRUE" << std::endl;
 		component->enableDebug(true);
+#endif
 		this->setActivated(true);
 		activityDrawingArea->setActivated(true);
 		//activityDrawingArea->invalidateWindow();
 	} else {
-		component->enableDebug(false);
 		this->setActivated(false);
 		activityDrawingArea->setActivated(false);
 		//activityDrawingArea->invalidateWindow();

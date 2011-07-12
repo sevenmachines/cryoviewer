@@ -86,7 +86,7 @@ protected:
 	static const int ACTIVITY_HEIGHT;
 	bool enable_drawing_area;
 
-	virtual void drawPoints(std::map<double, double> &);
+	virtual void drawPoints(std::map<double, double> &, const double reference_line=0);
 	virtual void drawText();
 	virtual void drawAxis();
 	virtual void setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const Gdk::Color & col);

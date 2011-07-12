@@ -6,6 +6,7 @@
  */
 
 #include "ActivityDrawingArea.h"
+#include "common/Maths.h"
 #include <gtkmm/main.h>
 #include <iostream>
 #include <algorithm>
@@ -142,7 +143,7 @@ bool ActivityDrawingArea::on_expose_event(GdkEventExpose* event) {
 	return true;
 }
 
-void ActivityDrawingArea::drawPoints(std::map<double, double> & ps) {
+void ActivityDrawingArea::drawPoints(std::map<double, double> & ps, const double reference_line) {
 	//std::cout<<"ActivityDrawingArea::drawPoints: " <<std::endl;
 	// This is where we draw on the window
 	Glib::RefPtr < Gdk::Window > window = get_window();
@@ -183,6 +184,22 @@ void ActivityDrawingArea::drawPoints(std::map<double, double> & ps) {
 		++it_ps;
 	}
 	cr->stroke();
+
+	// draw reference line if not zero
+	if (reference_line>0.00001 || reference_line < -0.00001) {
+		Gdk::Color temp_colour(currentColourScheme.getMainColour());
+		this->setSourceRGB(cr, Gdk::Color("tomato"));
+		cr->set_line_width(1.0);
+		const std::vector<double> dashed= { 1.0 };
+		cr->set_dash(dashed, 1);
+		double scaled_reference_line = (0.5 * height) - (scaley * reference_line);
+		double neg_scaled_reference_line = (0.5 * height) + (scaley * reference_line);
+		cr->move_to(0, scaled_reference_line);
+		cr->line_to(width, scaled_reference_line);
+		cr->move_to(0, neg_scaled_reference_line);
+			cr->line_to(width, neg_scaled_reference_line);
+		cr->stroke();
+	}
 	cr->restore();
 }
 

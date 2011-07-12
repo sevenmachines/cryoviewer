@@ -38,9 +38,11 @@ StructureWindow::~StructureWindow() {
 }
 
 void StructureWindow::updateData() {
+#ifdef STRUCTUREWINDOW_ENABLE_OPENGL
 	if (structureDrawingArea != 0) {
 		structureDrawingArea->update();
 	}
+#endif
 	if (activitiesWindow != 0) {
 		activitiesWindow->update();
 	}
@@ -92,11 +94,13 @@ void StructureWindow::initialise() {
 	// check if we have any clusters and set combo box if we do
 	structureChooserClusterComboBox->set_active(1);
 
+#ifdef STRUCTUREWINDOW_ENABLE_OPENGL
 	structureDrawingArea = new StructureGLDrawingArea(bundle);
 	//TODO test by setting to first cluster
 	structureDrawingArea->setDrawTest();
 
 	structureVBox->pack_start(*structureDrawingArea);
+#endif
 	this->setCluster(bundle->getClusters().begin()->second);
 	structureVBox->show();
 }

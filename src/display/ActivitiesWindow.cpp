@@ -5,7 +5,7 @@
  *      Author: "SevenMachines <SevenMachines@yahoo.co.uk>"
  */
 
-#define ACTIVITIESWINDOW_DEBUG
+//#define ACTIVITIESWINDOW_DEBUG
 
 #include "ActivitiesWindow.h"
 #include <sstream>
@@ -18,7 +18,6 @@ namespace display {
 
 ActivitiesWindow::ActivitiesWindow(const boost::shared_ptr<cryomesh::structures::Cluster> clus) :
 	cluster(clus) {
-	std::cout << "ActivitiesWindow::ActivitiesWindow: " << "DEBUG START" << std::endl;
 	loadWindow("Data/activitieswindow.glade");
 
 	// set title
@@ -30,15 +29,15 @@ ActivitiesWindow::ActivitiesWindow(const boost::shared_ptr<cryomesh::structures:
 
 	this->initialise();
 	mainWindow->show_all();
-	std::cout << "ActivitiesWindow::ActivitiesWindow: " << "DEBUG END" << std::endl;
 }
 
 ActivitiesWindow::~ActivitiesWindow() {
-	std::cout << "ActivitiesWindow::~ActivitiesWindow: " << "" << std::endl;
 }
 
 void ActivitiesWindow::updateData() {
+#ifdef ACTIVITIESWINDOW_DEBUG
 	std::cout << "ActivitiesWindow::updateData: " << "Panels: " << drawingAreas.size() << std::endl;
+#endif
 	// forall in drawingAreas
 	{
 		std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> >::iterator it_drawingAreas =
@@ -140,9 +139,11 @@ void ActivitiesWindow::updateNodeDisplay() {
 	}
 
 	// check our panels and nodes balance out
+#ifdef ACTIVITIESWINDOW_DEBUG
 	std::cout << "ActivitiesWindow::updateNodeDisplay: " << "added: " << count_added << " removed: " << count_removed
 			<< " total: " << drawingAreas.size() << std::endl;
 	std::cout << "ActivitiesWindow::updateNodeDisplay: " << "drawingAreas after: " << drawingAreas.size() << std::endl;
+#endif
 	if (this->isActive() == true) {
 		mainWindow->show_all();
 	}
@@ -153,7 +154,6 @@ void ActivitiesWindow::updateNodeDisplay() {
 			assert(false);
 		}
 	}
-	std::cout << "ActivitiesWindow::updateNodeDisplay: " << "END" << std::endl;
 }
 
 boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(

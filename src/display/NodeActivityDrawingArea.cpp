@@ -33,12 +33,10 @@ NodeActivityDrawingArea::~NodeActivityDrawingArea() {
 }
 
 void NodeActivityDrawingArea::setAsPrimaryInput() {
-	std::cout << "NodeActivityDrawingArea::setAsPrimaryInput: " << "" << std::endl;
 	this->isPrimaryInput = true;
 	this->setDefaultColourScheme(ActivityDrawingArea::PRIMARY_INPUT_COLOUR_SCHEME);
 }
 void NodeActivityDrawingArea::setAsPrimaryOutput() {
-	std::cout << "NodeActivityDrawingArea::setAsPrimaryOutput: " << "" << std::endl;
 	isPrimaryOutput = true;
 	this->setDefaultColourScheme(ActivityDrawingArea::PRIMARY_OUTPUT_COLOUR_SCHEME);
 
@@ -75,6 +73,22 @@ void NodeActivityDrawingArea::update() {
 
 }
 
+bool NodeActivityDrawingArea::on_expose_event(GdkEventExpose* event) {
+	//	std::cout<<"ActivityDrawingArea::on_expose_event: " <<std::endl;
+	Glib::RefPtr < Gdk::Window > window = get_window();
+	Cairo::RefPtr < Cairo::Context > cr = window->create_cairo_context();
+	// background fill
+	this->setSourceRGB(cr, currentColourScheme.getBackgroundColour());
+	cr->paint();
+
+	//this->update();
+	drawPoints(points, node->getActivityThreshold());
+	drawAxis();
+	// add text
+	drawText();
+	return true;
+}
+
 void NodeActivityDrawingArea::drawText() {
 	ActivityDrawingArea::drawText();
 	// This is where we draw on the window
@@ -108,10 +122,12 @@ void NodeActivityDrawingArea::drawText() {
 		int impulse_count = node->getImpulses().getSize();
 		int inputs_count = node->getConnector().getInputs().size();
 		int outputs_count = node->getConnector().getOutputs().size();
+		double threshold = node->getActivityThreshold();
 
 		ss << "Impulses: " << impulse_count;
 		ss << " Inputs: " << inputs_count;
 		ss << " Outputs: " << outputs_count;
+		ss << " Threshold: " << threshold;
 		cr->show_text(ss.str());
 	}
 	cr->restore();

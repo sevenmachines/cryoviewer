@@ -98,12 +98,10 @@ void NodeActivityDrawingAreaPanel::initialise() {
 }
 
 void NodeActivityDrawingAreaPanel::setAsPrimaryInput() {
-	std::cout << "NodeActivityDrawingAreaPanel::setAsPrimaryInput: " << "" << std::endl;
 	isPrimaryInput = true;
 }
 
 void NodeActivityDrawingAreaPanel::setAsPrimaryOutput() {
-	std::cout << "NodeActivityDrawingAreaPanel::setAsPrimaryOutput: " << "" << std::endl;
 	isPrimaryInput = false;
 }
 
@@ -125,13 +123,14 @@ void NodeActivityDrawingAreaPanel::onShowConnectionsCheckButtonClicked() {
 void NodeActivityDrawingAreaPanel::onActivityCheckButtonClicked() {
 	//std::cout << "NodeActivityDrawingAreaPanel::onActivityCheckButtonClicked: " << "" << std::endl;
 	if (activityCheckButton->get_active() == true) {
+#ifdef NODEACTIVITYPANEL_DEBUG
 		//std::cout << "NodeActivityDrawingAreaPanel::onActivityCheckButtonClicked: " << "TRUE" << std::endl;
 		node->enableDebug(true);
+#endif
 		this->setActivated(true);
 		activityDrawingArea->setActivated(true);
 		//activityDrawingArea->invalidateWindow();
 	} else {
-		node->enableDebug(false);
 		this->setActivated(false);
 		activityDrawingArea->setActivated(false);
 		//activityDrawingArea->invalidateWindow();

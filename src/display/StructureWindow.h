@@ -67,7 +67,9 @@ protected:
 	Gtk::Button * structureVisualiseButton;
 	Gtk::VBox * structureVBox;
 	Gtk::ToggleButton * structureActivitiesToggleButton;
+#ifdef STRUCTUREWINDOW_ENABLE_OPENGL
 	StructureGLDrawingArea * structureDrawingArea;
+#endif
 	boost::shared_ptr<ActivitiesWindow> activitiesWindow;
 	//Child widgets:
 
