@@ -1,4 +1,6 @@
 //#include "klGLEW.h"
+#ifdef ENABLE_OSG
+
 #include "osgGA/TrackballManipulator"
 #include "osgGA/FlightManipulator"
 #include "osgGA/DriveManipulator"
@@ -226,3 +228,5 @@ void OSGDrawingArea::update ()
 }
 
 //--------------------------------------------------------------------------------------------------------
+
+#endif

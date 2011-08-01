@@ -5,12 +5,14 @@
  *      Author: "SevenMachines <SevenMachines@yahoo.co.uk>"
  */
 
+#include "OSGStructureWindow.h"
 #include "NodeDisplayData.h"
 #include "StructureWindow.h"
 #include <osg/Node>
 #include <osg/Geode>
 #include <osg/Geometry>
 #include <osg/Texture2D>
+#include <osgText/Text>
 #include <osgDB/ReadFile>
 #include <osg/PositionAttitudeTransform>
 #include <osgGA/TrackballManipulator>
@@ -18,7 +20,6 @@
 #include <boost/uuid/uuid_io.hpp>
 
 using namespace cryomesh::components;
-using namespace cryomesh::structures;
 
 namespace cryo {
 

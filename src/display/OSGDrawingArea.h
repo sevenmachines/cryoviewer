@@ -1,6 +1,7 @@
 #ifndef __OSGDRAWINGAREA_H__
 #define __OSGDRAWINGAREA_H__
 
+#ifdef ENABLE_OSG
 
 #include <iostream>
 #include <gtkmm.h>
@@ -9,7 +10,7 @@
 #include <osgUtil/SceneView>
 #include <osgDB/ReadFile>
 #include <osgGA/GUIEventAdapter>
-#include <osgGA/MatrixManipulator>
+#include <osgGA/KeySwitchMatrixManipulator>
 
 using namespace std;
 
@@ -102,3 +103,4 @@ public:
 
 #endif // __OSGDRAWINGAREA_H__
 
+#endif

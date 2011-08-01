@@ -12,6 +12,7 @@
 #include "structures/Bundle.h"
 #include "structures/Cluster.h"
 #include "components/NodeMap.h"
+#include "StructureGLDrawingArea.h"
 #include "ActivitiesWindow.h"
 
 #include <gtkmm/button.h>
@@ -19,7 +20,6 @@
 #include <gtkmm/box.h>
 #include <gtkmm/liststore.h>
 #include <gtkmm/combobox.h>
-#include <gtkmm/comboboxentrytext.h>
 #include <gtkmm/comboboxtext.h>
 
 #include <string>

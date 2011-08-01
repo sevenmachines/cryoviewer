@@ -15,7 +15,6 @@
 #include "structures/Fibre.h"
 #include "spacial/Point.h"
 #include "common/SimpleGLDrawingArea.h"
-
 #include <gtkmm/box.h>
 
 using namespace cryomesh::structures;

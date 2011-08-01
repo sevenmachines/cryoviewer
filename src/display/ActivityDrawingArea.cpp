@@ -35,7 +35,12 @@ ActivityDrawingArea::ActivityDrawingArea() :
 			defaultColourScheme(ActivityDrawingArea::STANDARD_COLOURS) {
 
 	//std::cout << "ActivityDrawingArea::ActivityDrawingArea()" << std::endl;
+#ifdef ENABLE_GTK2
 	this->signal_expose_event().connect(sigc::mem_fun(*this, &ActivityDrawingArea::on_expose_event));
+
+#else
+	this->signal_draw().connect(sigc::mem_fun(*this, &ActivityDrawingArea::on_draw));
+#endif
 	set_size_request(-1, ActivityDrawingArea::ACTIVITY_HEIGHT);
 	this->setActivated(false);
 }
@@ -127,10 +132,14 @@ void ActivityDrawingArea::setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const G
 	cr->set_source_rgb(r, g, b);
 }
 
+#ifdef ENABLE_GTK2
 bool ActivityDrawingArea::on_expose_event(GdkEventExpose* event) {
 	//	std::cout<<"ActivityDrawingArea::on_expose_event: " <<std::endl;
 	Glib::RefPtr < Gdk::Window > window = get_window();
 	Cairo::RefPtr < Cairo::Context > cr = window->create_cairo_context();
+#else
+	bool ActivityDrawingArea::on_draw(const Cairo::RefPtr< Cairo::Context >& cr) {
+#endif
 	// background fill
 	this->setSourceRGB(cr, currentColourScheme.getBackgroundColour());
 	cr->paint();

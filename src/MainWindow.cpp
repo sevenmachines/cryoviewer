@@ -7,7 +7,6 @@
 
 #include "MainWindow.h"
 #include "display/StatisticsWindow.h"
-#include "display/StructureWindow.h"
 #include "display/DataWindow.h"
 #include "display/ActiveWindow.h"
 
@@ -30,7 +29,6 @@ const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.g
 MainWindow::MainWindow(std::string filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);
 	//init gl
-	Gtk::GL::init(argc, argv);
 
 	if (filename == "" || this->checkFileExists(filename) == false) {
 		std::cout << "MainWindow: " << "File " << "'" << filename << "'" << " does not exist..." << std::endl;
@@ -104,7 +102,7 @@ void MainWindow::onMainWindowToggleButtonNodesClicked() {
 }
 
 void MainWindow::onMainWindowToggleButtonStructureClicked() {
-	this->onMainWindowToggleButtonClicked<display::StructureWindow> (mainWindowToggleButtonStructure, structureWindow);
+	std::cout << "MainWindow::onMainWindowToggleButtonStructureClicked: " << "TODO" << std::endl;
 }
 void MainWindow::onMainWindowToggleButtonStatisticsClicked() {
 	this->onMainWindowToggleButtonClicked<display::StatisticsWindow> (mainWindowToggleButtonStatistics,
@@ -129,9 +127,10 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 				statisticsWindow->update();
 			}
 			// update all windows
-			if (structureWindow != 0) {
-				structureWindow->update();
-			}
+			//TODO Structure Window
+			//if (structureWindow != 0) {
+			//	structureWindow->update();
+			//}
 			// update all windows
 			if (dataWindow != 0) {
 				dataWindow->update();
@@ -163,7 +162,7 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 
 void MainWindow::onMainWindowDebugEnabledCheckButtonClicked() {
 	bool enable_debug = mainWindowDebugEnabledCheckButton->get_active() == true;
-	std::cout<<"MainWindow::onMainWindowDebugEnabledCheckButtonClicked: "<<enable_debug<<std::endl;
+	std::cout << "MainWindow::onMainWindowDebugEnabledCheckButtonClicked: " << enable_debug << std::endl;
 
 	this->manager->getMutableBundle()->enableDebug(enable_debug);
 }

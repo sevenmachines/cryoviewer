@@ -24,51 +24,14 @@ namespace display {
  */
 class DisplayWindow: public cryomesh::common::Debuggable {
 public:
-	DisplayWindow() {
-		mainWindow = 0;
-	}
-	virtual void loadWindow(const std::string filename) {
-		//std::cout << "DisplayWindow::loadWindow: " << "filename: "<<filename << std::endl;
-		try {
-			builder = Gtk::Builder::create();
-			builder->add_from_file(filename);
-			builder->get_widget("mainWindow", mainWindow);
-			this->initialise();
-		} catch (const Glib::FileError& ex) {
-			std::cerr << "DisplayWindow::loadWindow: FileError: " << ex.what() << std::endl;
-		} catch (const Gtk::BuilderError& ex) {
-			std::cerr << "DisplayWindow::loadWindow: BuilderError: " << ex.what() << std::endl;
-		}
-
-	}
-	virtual ~DisplayWindow() {
-	}
-	void update() {
-		if (this->isActive() == true) {
-			this->updateData();
-		}
-	}
-	virtual void activate() {
-		activeState = true;
-		if (mainWindow != 0) {
-			//std::cout << "DisplayWindow::activate: " << "show" << std::endl;
-			this->update();
-			mainWindow->show();
-		}
-	}
-	virtual void deactivate() {
-		activeState = false;
-		if (mainWindow != 0) {
-			//std::cout << "DisplayWindow::deactivate: " << "hide" << std::endl;
-			mainWindow->hide();
-		}
-	}
-	bool isActive() {
-		return activeState;
-	}
-	virtual void enableDebug(bool b){
-		this->setDebug(b);
-	}
+	DisplayWindow();
+	virtual void loadWindow(const std::string filename) ;
+	virtual ~DisplayWindow() ;
+	void update() ;
+	virtual void activate() ;
+	virtual void deactivate();
+	bool isActive();
+	virtual void enableDebug(bool b);
 
 protected:
 	Gtk::Window * mainWindow;
@@ -77,9 +40,7 @@ protected:
 	virtual void updateData()=0;
 	virtual void initialise()=0;
 
-	void setTitle(std::string title) {
-		mainWindow->set_title(title);
-	}
+	void setTitle(std::string title);
 private:
 	bool activeState;
 

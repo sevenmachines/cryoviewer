@@ -6,7 +6,6 @@
  */
 
 #include "StructureGLDrawingArea.h"
-#include "common/SimpleGLShape.h"
 #include "structures/Cluster.h"
 #include "structures/Fibre.h"
 #include "components/Node.h"

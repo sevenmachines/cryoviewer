@@ -74,7 +74,11 @@ public:
 
 protected:
 	//Override default signal handler:
+#ifdef ENABLE_GTK2
 	virtual bool on_expose_event(GdkEventExpose* event);
+#else
+	virtual bool on_draw(const Cairo::RefPtr< Cairo::Context >& cr);
+#endif
 	virtual void invalidateWindow(void);
 
 	std::map<double, double> points;

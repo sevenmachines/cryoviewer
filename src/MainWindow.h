@@ -9,7 +9,6 @@
 #define MAINWINDOW_H_
 
 #include "display/StatisticsWindow.h"
-#include "display/StructureWindow.h"
 #include "display/DataWindow.h"
 #include "display/ActiveWindow.h"
 #include "manager/CryoManager.h"
@@ -100,6 +99,7 @@ private:
 
 	boost::shared_ptr<display::DataWindow> dataWindow;
 	boost::shared_ptr<display::StatisticsWindow> statisticsWindow;
+	//TODO Structure window
 	boost::shared_ptr<display::StructureWindow> structureWindow;
 
 };
