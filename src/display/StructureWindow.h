@@ -19,13 +19,8 @@
 #include <gtkmm/box.h>
 #include <gtkmm/liststore.h>
 #include <gtkmm/combobox.h>
-#include <gtkmm/comboboxentrytext.h>
 #include <gtkmm/comboboxtext.h>
 
-#include <string>
-#include <osg/Group>
-#include <osgViewer/Viewer>
-#include <osgText/Text>
 #include <string>
 
 namespace cryo {
@@ -81,19 +76,11 @@ protected:
 	virtual void updateData();
 	virtual void initialise();
 
-	void showVisual(const std::map<boost::uuids::uuid, boost::shared_ptr<cryomesh::components::Node> > & nodes);
-	void showText(osg::Group* root) const ;
-
-	osg::Node* createHUD(osgText::Text* updateText);
-
-	void addNodeDrawable(const boost::shared_ptr<cryomesh::components::Node> & node, osg::Group* root) const ;
-
 private:
 	const boost::shared_ptr<cryomesh::structures::Bundle> bundle;
 	boost::shared_ptr<cryomesh::components::Node> selectedNode;
 	boost::shared_ptr<cryomesh::structures::Cluster> selectedCluster;
 
-	osg::ref_ptr<osgText::Text> displayText;
 };
 
 }

@@ -1,140 +1,31 @@
 
 **** Build of configuration Debug for project cryoviewer ****
 
-make all 
-Building file: ../src/elements/NodeSphere.cpp
+make -j all 
+Building file: ../src/MainWindow.cpp
 Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/elements/NodeSphere.d" -MT"src/elements/NodeSphere.d" -o"src/elements/NodeSphere.o" "../src/elements/NodeSphere.cpp"
-Finished building: ../src/elements/NodeSphere.cpp
- 
-Building file: ../src/display/ActiveWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ActiveWindow.d" -MT"src/display/ActiveWindow.d" -o"src/display/ActiveWindow.o" "../src/display/ActiveWindow.cpp"
-Finished building: ../src/display/ActiveWindow.cpp
- 
-Building file: ../src/display/ActivitiesWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ActivitiesWindow.d" -MT"src/display/ActivitiesWindow.d" -o"src/display/ActivitiesWindow.o" "../src/display/ActivitiesWindow.cpp"
-In file included from ../src/display/ConnectionActivityPanel.h:13:0,
-                 from ../src/display/ConnectionDisplayWindow.h:12,
-                 from ../src/display/NodeActivityDrawingAreaPanel.h:12,
-                 from ../src/display/ActivitiesWindow.h:12,
-                 from ../src/display/ActivitiesWindow.cpp:10:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-In file included from /home/niall/Projects/Eclipse/CPP/cryomesh/src/components/ConnectionMap.h:17:0,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Cluster.h:12,
-                 from ../src/display/ActivitiesWindow.h:13,
-                 from ../src/display/ActivitiesWindow.cpp:10:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-../src/display/ActivitiesWindow.cpp: In member function ‘virtual void cryo::viewer::display::ActivitiesWindow::removeNode(const boost::uuids::uuid&)’:
-../src/display/ActivitiesWindow.cpp:187:7: warning: variable ‘id_found_dbg’ set but not used [-Wunused-but-set-variable]
-Finished building: ../src/display/ActivitiesWindow.cpp
- 
-Building file: ../src/display/ActivityDrawingArea.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ActivityDrawingArea.d" -MT"src/display/ActivityDrawingArea.d" -o"src/display/ActivityDrawingArea.o" "../src/display/ActivityDrawingArea.cpp"
-Finished building: ../src/display/ActivityDrawingArea.cpp
- 
-Building file: ../src/display/ConnectionActivityDrawingArea.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ConnectionActivityDrawingArea.d" -MT"src/display/ConnectionActivityDrawingArea.d" -o"src/display/ConnectionActivityDrawingArea.o" "../src/display/ConnectionActivityDrawingArea.cpp"
-In file included from ../src/display/ConnectionActivityDrawingArea.h:12:0,
-                 from ../src/display/ConnectionActivityDrawingArea.cpp:8:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-../src/display/ConnectionActivityDrawingArea.cpp: In member function ‘virtual void cryo::viewer::display::ConnectionActivityDrawingArea::update()’:
-../src/display/ConnectionActivityDrawingArea.cpp:51:16: warning: unused variable ‘STARTINGX’ [-Wunused-variable]
-../src/display/ConnectionActivityDrawingArea.cpp:52:16: warning: unused variable ‘ENDX’ [-Wunused-variable]
-../src/display/ConnectionActivityDrawingArea.cpp: In member function ‘virtual void cryo::viewer::display::ConnectionActivityDrawingArea::drawText()’:
-../src/display/ConnectionActivityDrawingArea.cpp:94:12: warning: unused variable ‘height’ [-Wunused-variable]
-Finished building: ../src/display/ConnectionActivityDrawingArea.cpp
- 
-Building file: ../src/display/ConnectionActivityPanel.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ConnectionActivityPanel.d" -MT"src/display/ConnectionActivityPanel.d" -o"src/display/ConnectionActivityPanel.o" "../src/display/ConnectionActivityPanel.cpp"
-In file included from ../src/display/ConnectionActivityPanel.h:13:0,
-                 from ../src/display/ConnectionActivityPanel.cpp:10:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-Finished building: ../src/display/ConnectionActivityPanel.cpp
- 
-Building file: ../src/display/ConnectionDisplayWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/ConnectionDisplayWindow.d" -MT"src/display/ConnectionDisplayWindow.d" -o"src/display/ConnectionDisplayWindow.o" "../src/display/ConnectionDisplayWindow.cpp"
-In file included from ../src/display/ConnectionActivityPanel.h:13:0,
-                 from ../src/display/ConnectionDisplayWindow.h:12,
-                 from ../src/display/ConnectionDisplayWindow.cpp:8:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-../src/display/ConnectionDisplayWindow.cpp: In member function ‘virtual void cryo::viewer::display::ConnectionDisplayWindow::updateComponentDisplay(const std::map<boost::uuids::uuid, boost::shared_ptr<cryomesh::components::Connection> >&, std::map<boost::uuids::uuid, boost::shared_ptr<cryo::viewer::display::ConnectionActivityPanel> >&, const cryo::viewer::display::ConnectionDisplayWindow::ComponentType&)’:
-../src/display/ConnectionDisplayWindow.cpp:168:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-Finished building: ../src/display/ConnectionDisplayWindow.cpp
- 
-Building file: ../src/display/DataWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/DataWindow.d" -MT"src/display/DataWindow.d" -o"src/display/DataWindow.o" "../src/display/DataWindow.cpp"
-Finished building: ../src/display/DataWindow.cpp
- 
-Building file: ../src/display/DisplayWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/DisplayWindow.d" -MT"src/display/DisplayWindow.d" -o"src/display/DisplayWindow.o" "../src/display/DisplayWindow.cpp"
-Finished building: ../src/display/DisplayWindow.cpp
- 
-Building file: ../src/display/EventAdapter.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/EventAdapter.d" -MT"src/display/EventAdapter.d" -o"src/display/EventAdapter.o" "../src/display/EventAdapter.cpp"
-Finished building: ../src/display/EventAdapter.cpp
- 
-Building file: ../src/display/NodeActivityDrawingArea.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/NodeActivityDrawingArea.d" -MT"src/display/NodeActivityDrawingArea.d" -o"src/display/NodeActivityDrawingArea.o" "../src/display/NodeActivityDrawingArea.cpp"
-../src/display/NodeActivityDrawingArea.cpp: In member function ‘virtual void cryo::viewer::display::NodeActivityDrawingArea::drawText()’:
-../src/display/NodeActivityDrawingArea.cpp:99:12: warning: unused variable ‘height’ [-Wunused-variable]
-Finished building: ../src/display/NodeActivityDrawingArea.cpp
- 
-Building file: ../src/display/NodeActivityDrawingAreaPanel.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/NodeActivityDrawingAreaPanel.d" -MT"src/display/NodeActivityDrawingAreaPanel.d" -o"src/display/NodeActivityDrawingAreaPanel.o" "../src/display/NodeActivityDrawingAreaPanel.cpp"
-In file included from ../src/display/ConnectionActivityPanel.h:13:0,
-                 from ../src/display/ConnectionDisplayWindow.h:12,
-                 from ../src/display/NodeActivityDrawingAreaPanel.h:12,
-                 from ../src/display/NodeActivityDrawingAreaPanel.cpp:8:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-Finished building: ../src/display/NodeActivityDrawingAreaPanel.cpp
- 
-Building file: ../src/display/NodeDisplayData.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/NodeDisplayData.d" -MT"src/display/NodeDisplayData.d" -o"src/display/NodeDisplayData.o" "../src/display/NodeDisplayData.cpp"
-Finished building: ../src/display/NodeDisplayData.cpp
- 
-Building file: ../src/display/OSGDrawingArea.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/OSGDrawingArea.d" -MT"src/display/OSGDrawingArea.d" -o"src/display/OSGDrawingArea.o" "../src/display/OSGDrawingArea.cpp"
-Finished building: ../src/display/OSGDrawingArea.cpp
- 
-Building file: ../src/display/OSGStructureWindow.cpp
-Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/OSGStructureWindow.d" -MT"src/display/OSGStructureWindow.d" -o"src/display/OSGStructureWindow.o" "../src/display/OSGStructureWindow.cpp"
+g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/MainWindow.d" -MT"src/MainWindow.d" -o"src/MainWindow.o" "../src/MainWindow.cpp"
 In file included from /home/niall/Projects/Eclipse/CPP/cryomesh/src/components/ConnectionMap.h:17:0,
                  from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Cluster.h:12,
                  from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/ClusterMap.h:14,
                  from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Bundle.h:14,
-                 from ../src/display/OSGStructureWindow.h:12,
-                 from ../src/display/OSGStructureWindow.cpp:8:
+                 from ../src/display/StatisticsWindow.h:11,
+                 from ../src/MainWindow.h:11,
+                 from ../src/MainWindow.cpp:8:
 /home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
 In file included from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Cluster.h:21:0,
                  from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/ClusterMap.h:14,
                  from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Bundle.h:14,
-                 from ../src/display/OSGStructureWindow.h:12,
-                 from ../src/display/OSGStructureWindow.cpp:8:
+                 from ../src/display/StatisticsWindow.h:11,
+                 from ../src/MainWindow.h:11,
+                 from ../src/MainWindow.cpp:8:
 /home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-In file included from /usr/include/gtkglextmm-1.2/gdkmm/gl/tokens.h:27:0,
-                 from /usr/include/gtkglextmm-1.2/gtkmm/gl/widget.h:25,
-                 from /usr/include/gtkglextmm-1.2/gtkmm/gl/drawingarea.h:25,
-                 from /home/niall/Projects/Eclipse/CPP/cryoviewer/src/common/SimpleGLShape.h:14,
-                 from /home/niall/Projects/Eclipse/CPP/cryoviewer/src/common/SimpleGLDrawingArea.h:11,
-                 from ../src/display/StructureGLDrawingArea.h:17,
-                 from ../src/display/OSGStructureWindow.h:15,
-                 from ../src/display/OSGStructureWindow.cpp:8:
-/usr/include/gtkglextmm-1.2/gdkmm/gl/defs.h:25:31: fatal error: gdkglextmm-config.h: No such file or directory
-compilation terminated.
-make: *** [src/display/OSGStructureWindow.o] Error 1
+Finished building: ../src/MainWindow.cpp
+ 
+Building target: cryoviewer
+Invoking: GCC C++ Linker
+g++ -L"/home/niall/Projects/Eclipse/CPP/cryomesh/Debug" -L"/home/niall/Projects/Eclipse/CPP/cryomesh-common/Debug" -L//lib -std=c++0x -p -pg -o "cryoviewer"  ./src/elements/NodeSphere.o  ./src/display/ActiveWindow.o ./src/display/ActivitiesWindow.o ./src/display/ActivityDrawingArea.o ./src/display/ConnectionActivityDrawingArea.o ./src/display/ConnectionActivityPanel.o ./src/display/ConnectionDisplayWindow.o ./src/display/DataWindow.o ./src/display/DisplayWindow.o ./src/display/EventAdapter.o ./src/display/NodeActivityDrawingArea.o ./src/display/NodeActivityDrawingAreaPanel.o ./src/display/NodeDisplayData.o ./src/display/StatisticsWindow.o ./src/display/StructureWindow.o  ./src/ComponentDisplayData.o ./src/MainWindow.o   -lcryomesh-common -lcryomesh -lgmpxx -lgmp -lgtk-3 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lm -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0 -lxml++-2.6 -lxml2 -lglibmm-2.4 -lsigc-2.0 -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lcairomm-1.0 -losg -losgDB -losgFX -losgGA -losgParticle -losgSim -losgText -losgUtil -losgTerrain -losgManipulator -losgViewer -losgWidget -losgShadow -losgAnimation -losgVolume -lOpenThreads -lsqlite3
+Finished building target: cryoviewer
+ 
 
 **** Build Finished ****

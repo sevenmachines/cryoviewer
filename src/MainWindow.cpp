@@ -26,7 +26,7 @@ const std::string cryo::viewer::MainWindow::DEFAULT_CONFIG_FILE =
 		"/home/niall/Projects/Eclipse/cryomesh-cute/TestData/basic-2c.config";
 const std::string cryo::viewer::MainWindow::DEFAULT_UI_FILE = "Data/mainwindow.glade";
 
-MainWindow::MainWindow(std::string filename, int argc, char **argv) {
+MainWindow::MainWindow( std::string  filename, int argc, char **argv) {
 	Gtk::Main kit(argc, argv);
 	//init gl
 
@@ -102,8 +102,11 @@ void MainWindow::onMainWindowToggleButtonNodesClicked() {
 }
 
 void MainWindow::onMainWindowToggleButtonStructureClicked() {
-	std::cout << "MainWindow::onMainWindowToggleButtonStructureClicked: " << "TODO" << std::endl;
+	std::cout<<"MainWindow::onMainWindowToggleButtonStructureClicked: "<<"DEBUG 1"<<std::endl;
+	this->onMainWindowToggleButtonClicked<display::StructureWindow> (mainWindowToggleButtonStructure, structureWindow);
+	std::cout<<"MainWindow::onMainWindowToggleButtonStructureClicked: "<<"DEBUG 2"<<std::endl;
 }
+
 void MainWindow::onMainWindowToggleButtonStatisticsClicked() {
 	this->onMainWindowToggleButtonClicked<display::StatisticsWindow> (mainWindowToggleButtonStatistics,
 			statisticsWindow);
@@ -128,9 +131,9 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 			}
 			// update all windows
 			//TODO Structure Window
-			//if (structureWindow != 0) {
-			//	structureWindow->update();
-			//}
+			if (structureWindow != 0) {
+				structureWindow->update();
+			}
 			// update all windows
 			if (dataWindow != 0) {
 				dataWindow->update();
@@ -146,6 +149,7 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 template<class T>
 void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton,
 		boost::shared_ptr<T> & display_window) {
+	std::cout<<"MainWindow::onMainWindowToggleButtonClicked: "<<"DEBUG 1"<<std::endl;
 
 	if (togglebutton->get_active() == true) {
 		if (manager != 0) {
@@ -158,6 +162,7 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 	} else if (display_window != 0) {
 		display_window->deactivate();
 	}
+	std::cout<<"MainWindow::onMainWindowToggleButtonClicked: "<<"DEBUG 2"<<std::endl;
 }
 
 void MainWindow::onMainWindowDebugEnabledCheckButtonClicked() {

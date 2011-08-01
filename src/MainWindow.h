@@ -9,6 +9,7 @@
 #define MAINWINDOW_H_
 
 #include "display/StatisticsWindow.h"
+#include "display/StructureWindow.h"
 #include "display/DataWindow.h"
 #include "display/ActiveWindow.h"
 #include "manager/CryoManager.h"
@@ -22,7 +23,7 @@ namespace viewer {
 
 class MainWindow {
 public:
-	MainWindow(std::string filename, int argc, char **argv);
+	MainWindow( std::string  filename, int argc, char **argv);
 	virtual ~MainWindow();
 
 	virtual void initialise();
