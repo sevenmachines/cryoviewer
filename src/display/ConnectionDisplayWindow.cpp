@@ -164,7 +164,7 @@ void ConnectionDisplayWindow::updateComponentDisplay(
 	}
 
 	if (this->isDebugOn() == true) {
-		int all_panels_count = inputPanelsMap.size() + outputPanelsMap.size();
+		size_t all_panels_count = inputPanelsMap.size() + outputPanelsMap.size();
 		if (all_components.size() != all_panels_count) {
 			std::cout << "ConnectionDisplayWindow::updateComponentDisplay: " << "inputPanelsMap: "
 					<< inputPanelsMap.size() << " outputPanelsMap: " << outputPanelsMap.size() << std::endl;

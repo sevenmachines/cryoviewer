@@ -128,7 +128,6 @@ void StructureWindow::updateClusterChooser() {
 
 void StructureWindow::onStructureVisualiseButtonClicked() {
 	std::cout << "StructureWindow::onStructureVisualiseButtonClicked: " << "TODO: This is a demo" << std::endl;
-	const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & nodes = selectedCluster->getNodes();
 }
 
 void StructureWindow::onStructureActivitiesToggleButtonClicked() {
@@ -149,7 +148,6 @@ void StructureWindow::onStructureChooserClusterComboBoxChanged() {
 		if (row) {
 			//Get the data for the selected row, using our knowledge of the tree
 			//model:
-			int id = row[uuidColumns.columnID];
 			Glib::ustring name = row[uuidColumns.columnName];
 
 			boost::shared_ptr<Cluster> found_cluster;

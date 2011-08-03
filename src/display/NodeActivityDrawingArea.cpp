@@ -96,7 +96,6 @@ void NodeActivityDrawingArea::drawText() {
 	Cairo::RefPtr < Cairo::Context > cr = window->create_cairo_context();
 	Gtk::Allocation allocation = get_allocation();
 	const int width = allocation.get_width();
-	const int height = allocation.get_height();
 	cr->save();
 	cr->set_line_width(2.0);
 	cr->set_source_rgb(1, 1, 1);

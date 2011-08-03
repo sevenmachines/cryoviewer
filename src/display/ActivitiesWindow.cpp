@@ -184,7 +184,6 @@ void ActivitiesWindow::removeNode(const boost::uuids::uuid & uuid) {
 	int pre_pin_da_sz = primaryInputDrawingAreas.size();
 	int pre_pount_da_sz = primaryOutputDrawingAreas.size();
 #endif
-	bool id_found_dbg = false;
 	bool is_pin_dbg = false;
 	bool is_pout_dbg = false;
 
@@ -220,7 +219,6 @@ void ActivitiesWindow::removeNode(const boost::uuids::uuid & uuid) {
 			if (it_found != drawingAreas.end()) {
 				boost::shared_ptr<NodeActivityDrawingAreaPanel> found = it_found->second;
 				drawingAreas.erase(it_found);
-				id_found_dbg = true;
 				activitiesDrawingAreasVBox->remove(*found);
 			}
 		}

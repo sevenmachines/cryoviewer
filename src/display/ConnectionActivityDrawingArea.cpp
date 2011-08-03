@@ -48,8 +48,7 @@ void ConnectionActivityDrawingArea::setAsPrimaryOutput() {
 void ConnectionActivityDrawingArea::update() {
 	this->showDrawingArea(this->isActivated());
 	if (this->isActivated() == true) {
-		const double STARTINGX = 0;
-		const double ENDX = connection->getActivityTimer()->getStartingDelay();
+
 		multiPoints.clear();
 
 		const std::map<boost::uuids::uuid, boost::shared_ptr<Impulse> > & all_impulses =
@@ -91,7 +90,6 @@ void ConnectionActivityDrawingArea::drawText() {
 	Cairo::RefPtr < Cairo::Context > cr = window->create_cairo_context();
 	Gtk::Allocation allocation = get_allocation();
 	const int width = allocation.get_width();
-	const int height = allocation.get_height();
 	cr->save();
 	cr->set_line_width(2.0);
 	cr->set_source_rgb(1, 1, 1);

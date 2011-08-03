@@ -2,29 +2,14 @@
 **** Build of configuration Debug for project cryoviewer ****
 
 make -j all 
-Building file: ../src/MainWindow.cpp
+Building file: ../src/display/StructureWindow.cpp
 Invoking: GCC C++ Compiler
-g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O0 -g3 -p -pg -Wall -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/MainWindow.d" -MT"src/MainWindow.d" -o"src/MainWindow.o" "../src/MainWindow.cpp"
-In file included from /home/niall/Projects/Eclipse/CPP/cryomesh/src/components/ConnectionMap.h:17:0,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Cluster.h:12,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/ClusterMap.h:14,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Bundle.h:14,
-                 from ../src/display/StatisticsWindow.h:11,
-                 from ../src/MainWindow.h:11,
-                 from ../src/MainWindow.cpp:8:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-In file included from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Cluster.h:21:0,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/ClusterMap.h:14,
-                 from /home/niall/Projects/Eclipse/CPP/cryomesh/src/structures/Bundle.h:14,
-                 from ../src/display/StatisticsWindow.h:11,
-                 from ../src/MainWindow.h:11,
-                 from ../src/MainWindow.cpp:8:
-/home/niall/Projects/Eclipse/CPP/cryomesh/src/components/Connection.h:147:3: warning: "/*" within comment [-Wcomment]
-Finished building: ../src/MainWindow.cpp
+g++ -I"/home/niall/Projects/Eclipse/CPP/cryomesh/src" -I/usr/include/gtk-3.0 -I/usr/include/gtkglextmm-1.2 -I/usr/include/gtkmm-3.0 -I"/home/niall/Projects/Eclipse/CPP/cryoviewer/src" -I"/home/niall/Projects/Eclipse/CPP/cryomesh-common/src" -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/libdrm -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -O2 -pedantic -pedantic-errors -Wall -Werror -c -fmessage-length=0 -std=c++0x -pthread -DGSEAL_ENABLE -MMD -MP -MF"src/display/StructureWindow.d" -MT"src/display/StructureWindow.d" -o"src/display/StructureWindow.o" "../src/display/StructureWindow.cpp"
+Finished building: ../src/display/StructureWindow.cpp
  
 Building target: cryoviewer
 Invoking: GCC C++ Linker
-g++ -L"/home/niall/Projects/Eclipse/CPP/cryomesh/Debug" -L"/home/niall/Projects/Eclipse/CPP/cryomesh-common/Debug" -L//lib -std=c++0x -p -pg -o "cryoviewer"  ./src/elements/NodeSphere.o  ./src/display/ActiveWindow.o ./src/display/ActivitiesWindow.o ./src/display/ActivityDrawingArea.o ./src/display/ConnectionActivityDrawingArea.o ./src/display/ConnectionActivityPanel.o ./src/display/ConnectionDisplayWindow.o ./src/display/DataWindow.o ./src/display/DisplayWindow.o ./src/display/EventAdapter.o ./src/display/NodeActivityDrawingArea.o ./src/display/NodeActivityDrawingAreaPanel.o ./src/display/NodeDisplayData.o ./src/display/StatisticsWindow.o ./src/display/StructureWindow.o  ./src/ComponentDisplayData.o ./src/MainWindow.o   -lcryomesh-common -lcryomesh -lgmpxx -lgmp -lgtk-3 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lm -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0 -lxml++-2.6 -lxml2 -lglibmm-2.4 -lsigc-2.0 -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lcairomm-1.0 -losg -losgDB -losgFX -losgGA -losgParticle -losgSim -losgText -losgUtil -losgTerrain -losgManipulator -losgViewer -losgWidget -losgShadow -losgAnimation -losgVolume -lOpenThreads -lsqlite3
+g++ -L"/home/niall/Projects/Eclipse/CPP/cryomesh/Release" -L"/home/niall/Projects/Eclipse/CPP/cryomesh-common/Release" -L//lib -std=c++0x -o "cryoviewer"  ./src/elements/NodeSphere.o  ./src/display/ActiveWindow.o ./src/display/ActivitiesWindow.o ./src/display/ActivityDrawingArea.o ./src/display/ConnectionActivityDrawingArea.o ./src/display/ConnectionActivityPanel.o ./src/display/ConnectionDisplayWindow.o ./src/display/DataWindow.o ./src/display/DisplayWindow.o ./src/display/EventAdapter.o ./src/display/NodeActivityDrawingArea.o ./src/display/NodeActivityDrawingAreaPanel.o ./src/display/NodeDisplayData.o ./src/display/StatisticsWindow.o ./src/display/StructureWindow.o  ./src/ComponentDisplayData.o ./src/MainWindow.o   -lcryomesh-common -lcryomesh -lgmpxx -lgmp -lgtk-3 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lm -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lgthread-2.0 -lrt -lglib-2.0 -lxml++-2.6 -lxml2 -lglibmm-2.4 -lsigc-2.0 -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lcairomm-1.0 -losg -losgDB -losgFX -losgGA -losgParticle -losgSim -losgText -losgUtil -losgTerrain -losgManipulator -losgViewer -losgWidget -losgShadow -losgAnimation -losgVolume -lOpenThreads -lsqlite3
 Finished building target: cryoviewer
  
 
