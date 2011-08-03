@@ -222,11 +222,14 @@ void ConnectionActivityDrawingArea::drawBar(const double x, const double y, cons
 	cr->stroke();
 	cr->restore();
 }
-
+#ifdef ENABLE_GTK2
 bool ConnectionActivityDrawingArea::on_expose_event(GdkEventExpose* event) {
 	//	std::cout<<"ActivityDrawingArea::on_expose_event: " <<std::endl;
 	Glib::RefPtr < Gdk::Window > window = get_window();
 	Cairo::RefPtr < Cairo::Context > cr = window->create_cairo_context();
+#else
+		 bool ConnectionActivityDrawingArea::on_draw(const Cairo::RefPtr< Cairo::Context >& cr){
+#endif
 	// background fill
 	this->setColourScheme(DEFAULT_COLOUR_SCHEME);
 	this->setSourceRGB(cr, currentColourScheme.getBackgroundColour());

@@ -30,7 +30,11 @@ protected:
 	virtual void drawBar(const double x, const double y,  const int overlay_count, const Gdk::Color & colour);
 	virtual void setAsPrimaryInput();
 	virtual void setAsPrimaryOutput();
+#ifdef ENABLE_GTK2
 	virtual bool on_expose_event(GdkEventExpose* event);
+#else
+	virtual bool on_draw(const Cairo::RefPtr< Cairo::Context >& cr);
+#endif
 
 private:
 	const boost::shared_ptr<cryomesh::components::Connection> connection;
