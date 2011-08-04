@@ -15,6 +15,7 @@
 #include <gtkmm/checkbutton.h>
 #include <gtkmm/box.h>
 #include <gtkmm/label.h>
+#include <vector>
 
 namespace cryo {
 
@@ -38,7 +39,7 @@ protected:
 	virtual void updateData();
 	virtual void initialise();
 
-	virtual void updateNodeDisplay();
+	virtual void updateNodeDisplay(bool force_recreate = false);
 
 	virtual boost::shared_ptr<NodeActivityDrawingAreaPanel> addNode(
 			const boost::shared_ptr<cryomesh::components::Node> & node);
@@ -49,18 +50,23 @@ protected:
 
 	void onActivitiesWindowCheckButtonSelectAll();
 
+	void deleteAllChildren(Gtk::Container & container);
+	void clearDeadPanels();
+
+	std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> >::iterator findPanelByNodeUUID(const boost::uuids::uuid & uuid,
+			std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> > & container);
 private:
 	const boost::shared_ptr<cryomesh::structures::Cluster> cluster;
-	std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> > drawingAreas;
-	std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> > primaryInputDrawingAreas;
-	std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> > primaryOutputDrawingAreas;
+	std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> > drawingAreas;
+	std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> > primaryInputDrawingAreas;
+	std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> > primaryOutputDrawingAreas;
 
 	void selectAllNodes(bool b);
 
 };
 
-}//NAMESPACE
-}//NAMESPACE
-}//NAMESPACE
+} //NAMESPACE
+} //NAMESPACE
+} //NAMESPACE
 
 #endif /* ACTIVITIESWINDOW_H_ */

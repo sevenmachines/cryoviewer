@@ -90,7 +90,7 @@ void StructureWindow::initialise() {
 
 	structureVBox->pack_start(*structureDrawingArea);
 #endif
-this->setCluster(bundle->getClusters().begin()->second);
+//this->setCluster(bundle->getClusters().begin()->second);
 	structureVBox->show();
 }
 

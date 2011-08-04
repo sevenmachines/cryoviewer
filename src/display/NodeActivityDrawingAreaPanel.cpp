@@ -26,6 +26,7 @@ int NodeActivityDrawingAreaPanel::getIds() {
 NodeActivityDrawingAreaPanel::NodeActivityDrawingAreaPanel(const boost::shared_ptr<cryomesh::components::Node> & nd) :
 	node(nd), activated(false), id(NodeActivityDrawingAreaPanel::getIds()), isPrimaryInput(false), isPrimaryOutput(false) {
 	this->initialise();
+	assert (node->getUUID() == nd->getUUID());
 }
 
 NodeActivityDrawingAreaPanel::~NodeActivityDrawingAreaPanel() {
