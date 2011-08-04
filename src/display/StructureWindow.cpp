@@ -19,7 +19,7 @@ namespace viewer {
 namespace display {
 
 StructureWindow::StructureWindow(const boost::shared_ptr<cryomesh::structures::Bundle> bun) :
-		bundle(bun) {
+		preserveActivityWindows(true), bundle(bun) {
 	loadWindow("Data/structurewindow.glade");
 }
 
@@ -32,24 +32,53 @@ void StructureWindow::updateData() {
 		structureDrawingArea->update();
 	}
 #endif
-	if (activitiesWindow != 0) {
-		activitiesWindow->update();
+	if (currentActivitiesWindow != 0) {
+		currentActivitiesWindow->update();
 	}
 
 }
-void StructureWindow::setCluster(boost::shared_ptr<cryomesh::structures::Cluster> cluster, bool activated) {
-	if (activitiesWindow != 0) {
-		activitiesWindow->deactivate();
-		activitiesWindow.reset();
+
+bool StructureWindow::getPreserveActivityWindows() const {
+	return this->preserveActivityWindows;
+}
+void StructureWindow::setPreserveActivityWindows(bool b) {
+	preserveActivityWindows = b;
+	if (b == false) {
+		preservedActivitiesWindows.clear();
 	}
+}
+
+void StructureWindow::setCluster(boost::shared_ptr<cryomesh::structures::Cluster> cluster, bool activated) {
+	if ( ( selectedCluster !=0 ) && selectedCluster->getUUID() != cluster->getUUID()){
+		currentActivitiesWindow->deactivate();
+	}
+
 	selectedCluster = cluster;
-	this->update();
-	activitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
+
+	if (this->getPreserveActivityWindows() == true) {
+		// check if we've preserved this cluster and restore
+		std::map<boost::uuids::uuid, boost::shared_ptr<ActivitiesWindow> >::iterator it_actwin_found =
+				preservedActivitiesWindows.find(selectedCluster->getUUID());
+
+		if (it_actwin_found != preservedActivitiesWindows.end()) {
+			//restore
+			currentActivitiesWindow = it_actwin_found->second;
+
+		} else {
+			//create new and add new preserved entry
+			currentActivitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
+			preservedActivitiesWindows[cluster->getUUID()] = currentActivitiesWindow;
+		}
+	} else {
+		// not preserving so just create new
+		currentActivitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
+	}
+
 	structureActivitiesToggleButton->set_active(activated);
 	if (activated == true) {
-		activitiesWindow->activate();
+		currentActivitiesWindow->activate();
 	} else {
-		activitiesWindow->deactivate();
+		currentActivitiesWindow->deactivate();
 	}
 }
 
@@ -130,12 +159,12 @@ void StructureWindow::onStructureVisualiseButtonClicked() {
 
 void StructureWindow::onStructureActivitiesToggleButtonClicked() {
 	if (structureActivitiesToggleButton->get_active() == true) {
-		if (activitiesWindow == 0) {
-			activitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
+		if (currentActivitiesWindow == 0) {
+			currentActivitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
 		}
-		activitiesWindow->activate();
+		currentActivitiesWindow->activate();
 	} else {
-		activitiesWindow->deactivate();
+		currentActivitiesWindow->deactivate();
 	}
 }
 

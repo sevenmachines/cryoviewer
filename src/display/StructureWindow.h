@@ -64,7 +64,7 @@ protected:
 #ifdef STRUCTUREWINDOW_ENABLE_OPENGL
 	StructureGLDrawingArea * structureDrawingArea;
 #endif
-	boost::shared_ptr<ActivitiesWindow> activitiesWindow;
+	boost::shared_ptr<ActivitiesWindow> currentActivitiesWindow;
 	//Child widgets:
 
 	void onStructureVisualiseButtonClicked();
@@ -76,7 +76,19 @@ protected:
 	virtual void updateData();
 	virtual void initialise();
 
+	bool getPreserveActivityWindows()const;
+	void setPreserveActivityWindows(bool b);
+
 private:
+	/**
+	 * Save activity windows across switchings
+	 */
+	bool preserveActivityWindows;
+	/**
+	 * All activities windows mapped to their clusters
+	 */
+	std::map<boost::uuids::uuid, boost::shared_ptr< ActivitiesWindow > > preservedActivitiesWindows;
+
 	const boost::shared_ptr<cryomesh::structures::Bundle> bundle;
 	boost::shared_ptr<cryomesh::components::Node> selectedNode;
 	boost::shared_ptr<cryomesh::structures::Cluster> selectedCluster;
