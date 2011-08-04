@@ -149,7 +149,6 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 template<class T>
 void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton,
 		boost::shared_ptr<T> & display_window) {
-	std::cout<<"MainWindow::onMainWindowToggleButtonClicked: "<<"DEBUG 1"<<std::endl;
 
 	if (togglebutton->get_active() == true) {
 		if (manager != 0) {
@@ -162,7 +161,6 @@ void MainWindow::onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutto
 	} else if (display_window != 0) {
 		display_window->deactivate();
 	}
-	std::cout<<"MainWindow::onMainWindowToggleButtonClicked: "<<"DEBUG 2"<<std::endl;
 }
 
 void MainWindow::onMainWindowDebugEnabledCheckButtonClicked() {

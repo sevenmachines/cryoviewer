@@ -95,7 +95,10 @@ void ActivitiesWindow::initialise() {
 }
 
 void ActivitiesWindow::updateNodeDisplay() {
-	//std::cout << "ActivitiesWindow::updateNodeDisplay: " << "drawingAreas before: " << drawingAreas.size() << std::endl;
+#ifdef ACTIVITIESWINDOW_DEBUG
+	std::cout<<"ActivitiesWindow::updateNodeDisplay: "<<"DEBUG START"<<std::endl;
+	std::cout << "ActivitiesWindow::updateNodeDisplay: " << "drawingAreas before: " << drawingAreas.size() << std::endl;
+#endif
 	std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> > drawing_areas_copy(drawingAreas);
 
 	int count_added = 0;
@@ -158,6 +161,9 @@ void ActivitiesWindow::updateNodeDisplay() {
 
 boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
 		const boost::shared_ptr<cryomesh::components::Node> & node) {
+#ifdef ACTIVITIESWINDOW_DEBUG
+			std::cout<<"ActivitiesWindow::addNode: "<<"DEBUG START"<<std::endl;
+#endif
 	boost::shared_ptr<NodeActivityDrawingAreaPanel> panel(new NodeActivityDrawingAreaPanel(node));
 	bool is_pin = node->isPrimaryInputAttachedNode();
 	bool is_pout = node->isPrimaryOutputAttachedNode();
@@ -174,12 +180,15 @@ boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
 		drawingAreas[node->getUUID()] = panel;
 		activitiesDrawingAreasVBox->pack_start(*panel);
 	}
+#ifdef ACTIVITIESWINDOW_DEBUG
+			std::cout<<"ActivitiesWindow::addNode: "<<"DEBUG END"<<std::endl;
+#endif
 	return panel;
 }
 
 void ActivitiesWindow::removeNode(const boost::uuids::uuid & uuid) {
 #ifdef ACTIVITIESWINDOW_DEBUG
-
+	bool id_found_dbg = false;
 	int pre_da_sz = drawingAreas.size();
 	int pre_pin_da_sz = primaryInputDrawingAreas.size();
 	int pre_pount_da_sz = primaryOutputDrawingAreas.size();
@@ -217,6 +226,9 @@ void ActivitiesWindow::removeNode(const boost::uuids::uuid & uuid) {
 			std::map<boost::uuids::uuid, boost::shared_ptr<NodeActivityDrawingAreaPanel> >::iterator it_found =
 					drawingAreas.find(uuid);
 			if (it_found != drawingAreas.end()) {
+#ifdef ACTIVITIESWINDOW_DEBUG
+				id_found_dbg = true;
+#endif
 				boost::shared_ptr<NodeActivityDrawingAreaPanel> found = it_found->second;
 				drawingAreas.erase(it_found);
 				activitiesDrawingAreasVBox->remove(*found);

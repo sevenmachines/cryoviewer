@@ -19,10 +19,8 @@ namespace viewer {
 namespace display {
 
 StructureWindow::StructureWindow(const boost::shared_ptr<cryomesh::structures::Bundle> bun) :
-	bundle(bun) {
-	std::cout<<"StructureWindow::StructureWindow: "<<"DEBUG START"<<std::endl;
+		bundle(bun) {
 	loadWindow("Data/structurewindow.glade");
-	std::cout<<"StructureWindow::StructureWindow: "<<"DEBUG END"<<std::endl;
 }
 
 StructureWindow::~StructureWindow() {
@@ -46,7 +44,7 @@ void StructureWindow::setCluster(boost::shared_ptr<cryomesh::structures::Cluster
 	}
 	selectedCluster = cluster;
 	this->update();
-	activitiesWindow = boost::shared_ptr<ActivitiesWindow>(new ActivitiesWindow(selectedCluster));
+	activitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
 	structureActivitiesToggleButton->set_active(activated);
 	if (activated == true) {
 		activitiesWindow->activate();
@@ -56,7 +54,7 @@ void StructureWindow::setCluster(boost::shared_ptr<cryomesh::structures::Cluster
 }
 
 void StructureWindow::initialise() {
-	// get out widgets
+// get out widgets
 	builder->get_widget("structureVisualiseButton", structureVisualiseButton);
 	builder->get_widget("structureVBox", structureVBox);
 	builder->get_widget("structureActivitiesToggleButton", structureActivitiesToggleButton);
@@ -83,7 +81,7 @@ void StructureWindow::initialise() {
 			sigc::mem_fun(*this, &StructureWindow::onStructureChooserClusterComboBoxChanged));
 
 	// check if we have any clusters and set combo box if we do
-	structureChooserClusterComboBox->set_active(1);
+	//structureChooserClusterComboBox->set_active(1);
 
 #ifdef STRUCTUREWINDOW_ENABLE_OPENGL
 	structureDrawingArea = new StructureGLDrawingArea(bundle);
@@ -92,7 +90,7 @@ void StructureWindow::initialise() {
 
 	structureVBox->pack_start(*structureDrawingArea);
 #endif
-	this->setCluster(bundle->getClusters().begin()->second);
+this->setCluster(bundle->getClusters().begin()->second);
 	structureVBox->show();
 }
 
@@ -133,7 +131,7 @@ void StructureWindow::onStructureVisualiseButtonClicked() {
 void StructureWindow::onStructureActivitiesToggleButtonClicked() {
 	if (structureActivitiesToggleButton->get_active() == true) {
 		if (activitiesWindow == 0) {
-			activitiesWindow = boost::shared_ptr<ActivitiesWindow>(new ActivitiesWindow(selectedCluster));
+			activitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
 		}
 		activitiesWindow->activate();
 	} else {
@@ -150,7 +148,7 @@ void StructureWindow::onStructureChooserClusterComboBoxChanged() {
 			//model:
 			Glib::ustring name = row[uuidColumns.columnName];
 
-			boost::shared_ptr<Cluster> found_cluster;
+			boost::shared_ptr < Cluster > found_cluster;
 			// retreive a uuid
 			{
 				boost::uuids::string_generator gen;
@@ -173,9 +171,8 @@ void StructureWindow::onStructureChooserClusterComboBoxChanged() {
 	}
 }
 
+} //NAMESPACE
 
-}//NAMESPACE
-
-}//NAMESPACE
+} //NAMESPACE
 
 }

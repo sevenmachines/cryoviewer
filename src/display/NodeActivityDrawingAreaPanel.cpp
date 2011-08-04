@@ -5,6 +5,8 @@
  *      Author: "SevenMachines <SevenMachines@yahoo.co.uk>"
  */
 
+//#define NODEACTIVITYDRAWINGAREAPANEL_DEBUG
+
 #include "NodeActivityDrawingAreaPanel.h"
 
 namespace cryo {
@@ -54,6 +56,9 @@ void NodeActivityDrawingAreaPanel::update() {
 }
 
 void NodeActivityDrawingAreaPanel::initialise() {
+#ifdef NODEACTIVITYDRAWINGAREAPANEL_DEBUG
+std::cout<<"NodeActivityDrawingAreaPanel::initialise: "<<"START"<<std::endl;
+#endif
 	activityDrawingArea = boost::shared_ptr<NodeActivityDrawingArea>(new NodeActivityDrawingArea(node));
 	// setup label
 	{
@@ -95,6 +100,9 @@ void NodeActivityDrawingAreaPanel::initialise() {
 	this->pack_start(*checkButtonsVBox, false, false);
 	this->pack_start(*(activityDrawingArea), true, true);
 	this->show();
+#ifdef NODEACTIVITYDRAWINGAREAPANEL_DEBUG
+std::cout<<"NodeActivityDrawingAreaPanel::initialise: "<<"END"<<std::endl;
+#endif
 }
 
 void NodeActivityDrawingAreaPanel::setAsPrimaryInput() {

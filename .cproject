@@ -455,9 +455,9 @@
 									<listOptionValue builtIn="false" value="sqlite3"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1167657909" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/Debug}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh-common/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="//lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/cryomesh-common/Release}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.1290141889" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-std=c++0x " valueType="string"/>
 								<option id="gnu.cpp.link.option.debugging.prof.307875571" name="Generate prof information (-p)" superClass="gnu.cpp.link.option.debugging.prof" value="true" valueType="boolean"/>
@@ -499,6 +499,12 @@
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.542536898.1336197839;cdt.managedbuild.config.gnu.exe.debug.542536898.1336197839.;cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1487442006;cdt.managedbuild.tool.gnu.cpp.compiler.input.1489990013">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.542536898.1336197839;cdt.managedbuild.config.gnu.exe.debug.542536898.1336197839.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.185056014;cdt.managedbuild.tool.gnu.c.compiler.input.8470118">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.exe.debug.542536898;cdt.managedbuild.config.gnu.exe.debug.542536898.;cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1499344681;cdt.managedbuild.tool.gnu.c.compiler.input.1086802141">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
