@@ -69,6 +69,7 @@ void MainWindow::initialise() {
 	mainWindowBuilder->get_widget("mainWindowToggleButtonStatistics", mainWindowToggleButtonStatistics);
 	mainWindowBuilder->get_widget("mainWindowToggleButtonVisualise", mainWindowToggleButtonVisualise);
 	mainWindowBuilder->get_widget("mainWindowToggleButtonRun", mainWindowToggleButtonRun);
+	mainWindowBuilder->get_widget("mainWindowToggleButtonOverview", mainWindowToggleButtonOverview);
 	mainWindowBuilder->get_widget("mainWindowRunSpinButton", mainWindowRunSpinButton);
 	mainWindowBuilder->get_widget("mainWindowProgressBar", mainWindowProgressBar);
 	mainWindowBuilder->get_widget("mainWindowDebugEnabledCheckButton", mainWindowDebugEnabledCheckButton);
@@ -86,6 +87,8 @@ void MainWindow::initialise() {
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonVisualiseClicked));
 	mainWindowToggleButtonRun->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonRunClicked));
+	mainWindowToggleButtonOverview->signal_clicked().connect(
+			sigc::mem_fun(*this, &MainWindow::onMainWindowToggleButtonOverviewClicked));
 
 	mainWindowDebugEnabledCheckButton->signal_clicked().connect(
 			sigc::mem_fun(*this, &MainWindow::onMainWindowDebugEnabledCheckButtonClicked));
@@ -102,9 +105,7 @@ void MainWindow::onMainWindowToggleButtonNodesClicked() {
 }
 
 void MainWindow::onMainWindowToggleButtonStructureClicked() {
-	std::cout<<"MainWindow::onMainWindowToggleButtonStructureClicked: "<<"DEBUG 1"<<std::endl;
 	this->onMainWindowToggleButtonClicked<display::StructureWindow> (mainWindowToggleButtonStructure, structureWindow);
-	std::cout<<"MainWindow::onMainWindowToggleButtonStructureClicked: "<<"DEBUG 2"<<std::endl;
 }
 
 void MainWindow::onMainWindowToggleButtonStatisticsClicked() {
@@ -138,12 +139,19 @@ void MainWindow::onMainWindowToggleButtonRunClicked() {
 			if (dataWindow != 0) {
 				dataWindow->update();
 			}
-
+			// update all windows
+					if (overviewWindow != 0) {
+						overviewWindow->update();
+					}
 			this->processPendingEvents();
 		}
 		mainWindowToggleButtonRun->set_active(false);
 	}
 
+}
+
+void MainWindow::onMainWindowToggleButtonOverviewClicked() {
+	this->onMainWindowToggleButtonClicked<display::OverviewWindow> (mainWindowToggleButtonOverview, overviewWindow);
 }
 
 template<class T>

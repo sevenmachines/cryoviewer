@@ -12,6 +12,7 @@
 #include "display/StructureWindow.h"
 #include "display/DataWindow.h"
 #include "display/ActiveWindow.h"
+#include "display/OverviewWindow.h"
 #include "manager/CryoManager.h"
 
 #include <gtkmm.h>
@@ -23,7 +24,7 @@ namespace viewer {
 
 class MainWindow {
 public:
-	MainWindow( std::string  filename, int argc, char **argv);
+	MainWindow(std::string filename, int argc, char **argv);
 	virtual ~MainWindow();
 
 	virtual void initialise();
@@ -60,7 +61,12 @@ public:
 	 */
 	void onMainWindowToggleButtonRunClicked();
 
-	bool onDeleteEvent(GdkEventAny *) ;
+	/**
+	 * Signal handler for when overview toggle button is clicked
+	 */
+	void onMainWindowToggleButtonOverviewClicked();
+
+	bool onDeleteEvent(GdkEventAny *);
 
 	void processPendingEvents();
 
@@ -80,6 +86,8 @@ protected:
 	Gtk::ToggleButton * mainWindowToggleButtonStatistics;
 	Gtk::ToggleButton * mainWindowToggleButtonVisualise;
 	Gtk::ToggleButton * mainWindowToggleButtonRun;
+	Gtk::ToggleButton * mainWindowToggleButtonOverview;
+
 	Gtk::SpinButton * mainWindowRunSpinButton;
 	Gtk::ProgressBar * mainWindowProgressBar;
 	Gtk::Image * structureButtonImage;
@@ -93,7 +101,7 @@ protected:
 	 * 	The template pointer to the actual display window to work with
 	 */
 	template<class T>
-	void onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton, boost::shared_ptr<T> & display_window) ;
+	void onMainWindowToggleButtonClicked(Gtk::ToggleButton * togglebutton, boost::shared_ptr<T> & display_window);
 
 private:
 	boost::shared_ptr<cryomesh::manager::CryoManager> manager;
@@ -102,6 +110,7 @@ private:
 	boost::shared_ptr<display::StatisticsWindow> statisticsWindow;
 	//TODO Structure window
 	boost::shared_ptr<display::StructureWindow> structureWindow;
+	boost::shared_ptr<display::OverviewWindow> overviewWindow;
 
 };
 
