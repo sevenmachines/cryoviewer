@@ -11,7 +11,7 @@ namespace viewer {
 
 namespace display {
 
-DisplayWindow::DisplayWindow() {
+DisplayWindow::DisplayWindow() : activeState(false){
 	mainWindow = 0;
 }
 DisplayWindow::~DisplayWindow() {

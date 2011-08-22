@@ -8,6 +8,7 @@
 //#define ACTIVITIESWINDOW_DEBUG
 #include "ActivitiesWindow.h"
 #include <sstream>
+#include <assert.h>
 
 using namespace cryomesh::components;
 
@@ -16,7 +17,7 @@ namespace viewer {
 namespace display {
 
 ActivitiesWindow::ActivitiesWindow(const boost::shared_ptr<cryomesh::structures::Cluster> clus) :
-		cluster(clus) {
+		display::DisplayWindow(), cluster(clus) {
 	loadWindow("Data/activitieswindow.glade");
 
 	// set title
@@ -27,6 +28,7 @@ ActivitiesWindow::ActivitiesWindow(const boost::shared_ptr<cryomesh::structures:
 	}
 
 	mainWindow->show_all();
+	assert(this->cluster != 0);
 }
 
 ActivitiesWindow::~ActivitiesWindow() {
@@ -108,9 +110,9 @@ void ActivitiesWindow::updateNodeDisplay(bool force_recreate) {
 		this->deleteAllChildren(*activitiesPrimaryOutputsDrawingAreasVBox);
 		const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
 
-		size_t node_overspill = all_nodes.size() +  std::min(static_cast<size_t>(10), (all_nodes.size() / 100) );
+		size_t node_overspill = all_nodes.size() + std::min(static_cast<size_t>(10), (all_nodes.size() / 100));
 
-		drawingAreas.reserve( node_overspill );
+		drawingAreas.reserve(node_overspill);
 
 		// forall in all_nodes
 		{
@@ -122,8 +124,8 @@ void ActivitiesWindow::updateNodeDisplay(bool force_recreate) {
 #ifdef ACTIVITIESWINDOW_DEBUG
 				boost::uuids::uuid panel_node_uuid = panel->getNode()->getUUID();
 				std::cout << "ActivitiesWindow::updateNodeDisplay: " << "Forcing recreation: new panel ( "
-						<< count_added << " of " << all_nodes.size() << " )" << " nodeid " << panel_node_uuid
-						<< std::endl;
+				<< count_added << " of " << all_nodes.size() << " )" << " nodeid " << panel_node_uuid
+				<< std::endl;
 				assert(it_all_nodes->first == panel_node_uuid);
 				++count_added;
 #endif
@@ -179,7 +181,7 @@ boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
 		activitiesPrimaryInputsDrawingAreasVBox->pack_start(*panel);
 #ifdef ACTIVITIESWINDOW_DEBUG
 		std::cout << "ActivitiesWindow::addNode: " << "Adding primary input panel: " << panel->getNode()->getUUID()
-				<< std::endl;
+		<< std::endl;
 #endif
 	}
 	if (is_pout == true) {
@@ -187,7 +189,7 @@ boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
 		activitiesPrimaryOutputsDrawingAreasVBox->pack_start(*panel);
 #ifdef ACTIVITIESWINDOW_DEBUG
 		std::cout << "ActivitiesWindow::addNode: " << "Adding primary output panel: " << panel->getNode()->getUUID()
-				<< std::endl;
+		<< std::endl;
 #endif
 	}
 	if (is_pin != true && is_pout != true) {
@@ -195,7 +197,7 @@ boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
 		activitiesDrawingAreasVBox->pack_start(*panel);
 #ifdef ACTIVITIESWINDOW_DEBUG
 		std::cout << "ActivitiesWindow::addNode: " << "Adding normal panel: " << panel->getNode()->getUUID()
-				<< std::endl;
+		<< std::endl;
 #endif
 	}
 	return panel;

@@ -19,7 +19,7 @@ class GraphWindow: public Gtk::DrawingArea {
 public:
 
 	enum GraphProperties {
-		SCALE_Y = 1, SCALE_X = 2
+		SCALE_Y = 1, SCALE_X = 2, SHOW_MIN = 4, SHOW_MAX = 8
 	};
 	GraphWindow();
 	virtual ~GraphWindow();
@@ -50,17 +50,20 @@ protected:
 	/**
 	 * Draw the underlying frameworks such as axis to overlay our graph on
 	 */
-	virtual void drawFramework(const Cairo::RefPtr<Cairo::Context>& cr);
+	virtual void drawFramework(const Cairo::RefPtr<Cairo::Context>& cr, const std::pair<double, double> scale =
+			std::pair<double, double>(1.0, 1.0));
 
 	/**
 	 * Draw out the actual graph data
 	 */
-	virtual void drawGraph(const Cairo::RefPtr<Cairo::Context>& cr);
+	virtual void drawGraph(const Cairo::RefPtr<Cairo::Context>& cr,
+			const std::pair<double, double> scale = std::pair<double, double>(1.0, 1.0));
 
 	/**
 	 * Draw text such as labelling
 	 */
-	virtual void drawText(const Cairo::RefPtr<Cairo::Context>& cr);
+	virtual void drawText(const Cairo::RefPtr<Cairo::Context>& cr,
+			const std::pair<double, double> scale = std::pair<double, double>(1.0, 1.0));
 
 	void setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const Gdk::Color & col);
 
@@ -71,6 +74,37 @@ private:
 	int graphProperties;
 	int graphSize;
 	std::list<cryomesh::spacial::Point> points;
+
+	double xAxis;
+	double yAxis;
+	double zAxis;
+
+	/**
+	 * Point representing the max x, y and z values within the data set
+	 */
+	cryomesh::spacial::Point maxPoint;
+	/**
+	 * Point representing the min x, y and z values within the data set
+	 */
+	cryomesh::spacial::Point minPoint;
+
+	/**
+	 * Find max an min values for x y and z in data set and return a virtual
+	 * point pair of max/min points
+	 */
+	std::pair<cryomesh::spacial::Point, cryomesh::spacial::Point> findVirtualMaxMinPoint() const;
+
+	std::pair<double, double> getAxisScale() const;
+
+	struct GraphColours {
+		Gdk::Color frameworkForeground;
+		Gdk::Color frameworkBackground;
+		Gdk::Color textForeground;
+		Gdk::Color textBackground;
+		Gdk::Color dataForeground;
+		Gdk::Color dataBackground;
+	} graphColours;
+
 };
 
 } /* namespace display */
