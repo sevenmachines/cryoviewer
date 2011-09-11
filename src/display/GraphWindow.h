@@ -39,6 +39,19 @@ public:
 	virtual void remove(const std::list<cryomesh::spacial::Point> & list);
 	virtual void clear();
 
+	/**
+		 * To stream operator
+		 *
+		 *	@param std::ostream & os
+		 *		The output stream
+		 *	@param const GraphWindow & obj
+		 *		The object to stream
+		 *
+		 *	@return std::ostream &
+		 *		The output stream
+		 */
+		friend std::ostream& operator<<(std::ostream & os, const GraphWindow & obj);
+
 protected:
 #ifdef ENABLE_GTK2
 	virtual bool on_expose_event(GdkEventExpose* event);
@@ -50,20 +63,22 @@ protected:
 	/**
 	 * Draw the underlying frameworks such as axis to overlay our graph on
 	 */
-	virtual void drawFramework(const Cairo::RefPtr<Cairo::Context>& cr, const std::pair<double, double> scale =
-			std::pair<double, double>(1.0, 1.0));
+	virtual void drawFramework(const Cairo::RefPtr<Cairo::Context>& cr);
 
 	/**
 	 * Draw out the actual graph data
 	 */
-	virtual void drawGraph(const Cairo::RefPtr<Cairo::Context>& cr,
-			const std::pair<double, double> scale = std::pair<double, double>(1.0, 1.0));
+	virtual void drawGraph(const Cairo::RefPtr<Cairo::Context>& cr);
 
 	/**
 	 * Draw text such as labelling
 	 */
-	virtual void drawText(const Cairo::RefPtr<Cairo::Context>& cr,
-			const std::pair<double, double> scale = std::pair<double, double>(1.0, 1.0));
+	virtual void drawText(const Cairo::RefPtr<Cairo::Context>& cr);
+
+	/**
+	 * Calculate window aspect and scaling
+	 */
+	virtual void calculateWindowAspect();
 
 	void setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const Gdk::Color & col);
 
@@ -75,9 +90,34 @@ private:
 	int graphSize;
 	std::list<cryomesh::spacial::Point> points;
 
-	double xAxis;
-	double yAxis;
-	double zAxis;
+	/**
+	 * Structure to hold variables relating to the window aspect and scaling
+	 */
+	struct GraphWindowAspect {
+		GraphWindowAspect() :
+				xAxis(0), yAxis(0), zAxis(0) {
+		}
+		double xAxis;
+		double yAxis;
+		double zAxis;
+
+		double minXAxis;
+		double minYAxis;
+		double minZAxis;
+
+		double maxXAxis;
+		double maxYAxis;
+		double maxZAxis;
+
+		struct Scale {
+			Scale() :
+					x(1.0), y(1.0), z(1.0) {
+			}
+			double x;
+			double y;
+			double z;
+		} scale;
+	} graphWindowAspect;
 
 	/**
 	 * Point representing the max x, y and z values within the data set
@@ -94,7 +134,7 @@ private:
 	 */
 	std::pair<cryomesh::spacial::Point, cryomesh::spacial::Point> findVirtualMaxMinPoint() const;
 
-	std::pair<double, double> getAxisScale() const;
+	bool checkPointMaxMin(const cryomesh::spacial::Point & obj)const;
 
 	struct GraphColours {
 		Gdk::Color frameworkForeground;

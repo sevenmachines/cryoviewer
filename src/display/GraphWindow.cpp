@@ -7,6 +7,7 @@
 
 #include "GraphWindow.h"
 #include "common/Maths.h"
+#include <iostream>
 
 using namespace cryomesh::spacial;
 using namespace cryomesh::common;
@@ -19,17 +20,17 @@ const int GraphWindow::GRAPH_PROPERTIES = SCALE_X | SCALE_Y | SHOW_MAX | SHOW_MI
 const int GraphWindow::GRAPH_SIZE = 10;
 
 GraphWindow::GraphWindow() :
-		graphProperties(GRAPH_PROPERTIES), xAxis(0), yAxis(0), zAxis(0) {
+		graphProperties(GRAPH_PROPERTIES) {
 	this->clear();
 	this->setSize(GRAPH_SIZE);
 	this->set_size_request(GRAPH_SIZE, 50);
 
-	graphColours.dataForeground=Gdk::Color("white");
-	graphColours.dataBackground=Gdk::Color("black");
-	graphColours.textForeground=Gdk::Color("grey");
-	graphColours.textBackground=Gdk::Color("grey");
-	graphColours.frameworkForeground=Gdk::Color("grey");
-	graphColours.frameworkBackground=Gdk::Color("grey");
+	graphColours.dataForeground = Gdk::Color("white");
+	graphColours.dataBackground = Gdk::Color("black");
+	graphColours.textForeground = Gdk::Color("grey");
+	graphColours.textBackground = Gdk::Color("grey");
+	graphColours.frameworkForeground = Gdk::Color("grey");
+	graphColours.frameworkBackground = Gdk::Color("grey");
 }
 
 GraphWindow::~GraphWindow() {
@@ -55,21 +56,10 @@ bool GraphWindow::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
 	this->setSourceRGB(cr, graphColours.dataBackground);
 	cr->paint();
 
-	std::pair<double, double> scale;
-	bool do_scalex = (graphProperties & SCALE_X);
-	bool do_scale_y = (graphProperties & SCALE_Y);
-	if (do_scalex || do_scale_y) {
-		scale = this->getAxisScale();
-		if (do_scalex == false) {
-			scale.first = 1.0;
-		}
-		if (do_scale_y == false) {
-			scale.second = 1.0;
-		}
-	}
-	drawGraph(cr, scale);
-	drawFramework(cr, scale);
-	drawText(cr, scale);
+	this->calculateWindowAspect();
+	drawGraph(cr);
+	drawFramework(cr);
+	drawText(cr);
 	return true;
 }
 
@@ -83,55 +73,42 @@ void GraphWindow::invalidateWindow() {
 	}
 }
 
-void GraphWindow::drawFramework(const Cairo::RefPtr<Cairo::Context>& cr, const std::pair<double, double> scale) {
-	Gtk::Allocation allocation = get_allocation();
-	const int WIDTH = allocation.get_width();
-	const int HEIGHT = allocation.get_height();
-
-	double scalex = scale.first;
-	double scaley = scale.second;
-
+void GraphWindow::drawFramework(const Cairo::RefPtr<Cairo::Context>& cr) {
 	//draw axis
 	cr->save();
 	cr->set_line_width(2.0);
-	this->setSourceRGB(cr,  graphColours.frameworkForeground);
+	this->setSourceRGB(cr, graphColours.frameworkForeground);
 	cr->set_font_size(12);
 
-	cr->move_to(0, HEIGHT / 2);
-	cr->line_to(WIDTH, HEIGHT / 2);
+	cr->save();
 
-	cr->move_to(scalex * 190, 25 + HEIGHT / 2);
-	cr->show_text("20");
-	cr->move_to(scalex * 390, 25 + HEIGHT / 2);
-	cr->show_text("40");
-	cr->move_to(scalex * 590, 25 + HEIGHT / 2);
-	cr->show_text("60");
-	cr->move_to(scalex * 790, 25 + HEIGHT / 2);
-	cr->show_text("80");
-	cr->stroke();
-
-	// Draw max mins
-	cr->set_dash(std::vector<double>({0,1}), 0);
 	if (graphProperties & SHOW_MIN) {
-		cr->move_to(0,  (0.5 * HEIGHT) -(0.5 *scaley * minPoint.getY()));
-		cr->line_to(WIDTH,  (0.5 * HEIGHT) -(0.5 *scaley * minPoint.getY()));
-		std::cout<<"GraphWindow::drawFramework: "<<"MIN_AXIS: "<<"("<<WIDTH <<","<< (scaley * minPoint.getY())<<")"<<std::endl;
+		cr->set_dash(std::vector<double>( { 0, 1 }), 0);
+
+		//draw min
+		cr->move_to(graphWindowAspect.minXAxis, graphWindowAspect.minYAxis);
+		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.minYAxis);
+		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
+				<< graphWindowAspect.minYAxis << std::endl;
+		// do axis marks
+		//		cr->move_to(scalex * 190, 25 + HEIGHT / 2);
+		//			cr->show_text("20");
 	}
 	if (graphProperties & SHOW_MAX) {
-		cr->move_to(0, (0.5 * HEIGHT) -(0.5 * scaley * maxPoint.getY()));
-		cr->line_to(WIDTH,  (0.5 * HEIGHT) -(0.5 *scaley * maxPoint.getY()));
-		std::cout<<"GraphWindow::drawFramework: "<<"MAX_AXIS: "<<"("<<WIDTH <<","<< (scaley * maxPoint.getY())<<")"<<std::endl;
+		cr->set_dash(std::vector<double>( { 0, 1 }), 0);
+		//draw max
+		cr->move_to(graphWindowAspect.minXAxis, graphWindowAspect.maxYAxis);
+		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.maxYAxis);
+		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
+				<< graphWindowAspect.maxYAxis << std::endl;
 	}
 	cr->stroke();
 	cr->restore();
 }
 
-void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr, const std::pair<double, double> scale) {
-	std::cout << "GraphWindow::drawGraph: " << "" << std::endl;
+void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr) {
+	std::cout << "GraphWindow::drawGraph: " << *this << std::endl;
 	cr->save();
-	Gtk::Allocation allocation = get_allocation();
-	//const int WIDTH = allocation.get_width();
-	const int HEIGHT = allocation.get_height();
 
 	cr->set_line_width(2.0);
 	this->setSourceRGB(cr, Gdk::Color("white"));
@@ -139,40 +116,71 @@ void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr, const std::
 	//diffx = maxx-minx;
 	//diffy = maxy - miny;
 
-	double scalex = scale.first;
-	double scaley = scale.second;
+	double scalex = graphWindowAspect.scale.x;
+	double scaley = graphWindowAspect.scale.y;
 
-	int count_x = 0;
 	std::list<cryomesh::spacial::Point>::const_iterator it_ps = points.begin();
-	if (it_ps != points.end()) {
-		cr->move_to(scalex * count_x, (0.5 * HEIGHT) - (0.5 * scaley * it_ps->getY()));
-	} else {
-		cr->move_to(0, HEIGHT / 2);
-	}
-	while (it_ps != points.end()) {
-		++count_x;
-		double x_point_final = scalex * count_x;
-		double y_point_final = (0.5 * HEIGHT) - (0.5 * scaley * it_ps->getY());
-		std::cout << "GraphWindow::drawGraph: " << "(" << x_point_final << ", " << y_point_final << ")" << std::endl;
 
-		cr->line_to(x_point_final, y_point_final);
+	int count = 0;
+
+	while (it_ps != points.end()) {
+
+		double x_point_final = scalex * (it_ps->getX() - this->minPoint.getX());
+		//double y_point_final = (0.5 * HEIGHT) - (0.5 * scaley * it_ps->getY());
+		double y_point_final = graphWindowAspect.maxYAxis - (scaley * it_ps->getY());
+		std::cout << "GraphWindow::drawGraph: " << "(" << it_ps->getX() << ", " << it_ps->getY() << ")" << " at "
+				<< "( " << x_point_final << ", " << y_point_final << ")	" << std::endl;
+		if (count > 0) {
+			cr->line_to(x_point_final, y_point_final);
+		}
+		++count;
 		++it_ps;
 	}
 	cr->stroke();
 	cr->restore();
 }
 
-void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr, const std::pair<double, double> scale) {
+void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
 	std::cout << "GraphWindow::drawText: " << "" << std::endl;
 
-	double scalex = scale.first;
-	double scaley = scale.second;
+	double scalex = graphWindowAspect.scale.x;
+	double scaley = graphWindowAspect.scale.y;
+
 	Glib::RefPtr<Pango::Layout> pangoLayout = Pango::Layout::create(cr);
 	cr->move_to(scalex * 10, scaley * 10);
 	pangoLayout->set_text("text");
 	pangoLayout->update_from_cairo_context(cr); //gets cairo cursor position
 	pangoLayout->add_to_cairo_context(cr); //adds text to cairos stack of stuff to be drawn
 	cr->stroke();
+}
+
+void GraphWindow::calculateWindowAspect() {
+
+	// calculate axis scale
+	double DELTA = 0.01;
+
+	Gtk::Allocation allocation = get_allocation();
+	const int WIDTH = allocation.get_width();
+	const int HEIGHT = allocation.get_height();
+
+	graphWindowAspect.scale.x = static_cast<double>(WIDTH) /  std::max<double>(DELTA, (maxPoint.getX() - minPoint.getX()));
+	graphWindowAspect.scale.y = static_cast<double>(HEIGHT) /  std::max<double>(DELTA, (maxPoint.getY() - minPoint.getY()));
+	graphWindowAspect.scale.z = 1.0;
+
+	graphWindowAspect.scale.x = std::max<double>(DELTA, graphWindowAspect.scale.x);
+	graphWindowAspect.scale.y = std::max<double>(DELTA, graphWindowAspect.scale.y);
+	graphWindowAspect.scale.z = std::max<double>(DELTA, graphWindowAspect.scale.z);
+
+	// set minmax axis
+	graphWindowAspect.minXAxis = 0;
+	graphWindowAspect.maxXAxis = graphWindowAspect.scale.x * maxPoint.getX();
+
+	graphWindowAspect.minYAxis = graphWindowAspect.scale.y * minPoint.getY();
+	graphWindowAspect.maxYAxis = graphWindowAspect.scale.y * maxPoint.getY();
+
+	graphWindowAspect.minZAxis = graphWindowAspect.scale.z * minPoint.getZ();
+	graphWindowAspect.maxZAxis = graphWindowAspect.scale.z * maxPoint.getZ();
+
 }
 
 void GraphWindow::setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const Gdk::Color & col) {
@@ -186,9 +194,22 @@ void GraphWindow::add(cryomesh::spacial::Point obj) {
 	points.push_back(obj);
 	if (graphSize >= 0) {
 		int size_diff = points.size() - graphSize;
+		bool need_maxmin_check = false;
 		while (size_diff > 0) {
+
+			const Point & temp_point = points.front();
+			if (this->checkPointMaxMin(temp_point) == true) {
+				need_maxmin_check = true;
+
+			}
 			points.pop_front();
 			--size_diff;
+		}
+
+		if (need_maxmin_check == true) {
+			std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
+			minPoint = maxmin.first;
+			maxPoint = maxmin.second;
 		}
 	}
 
@@ -245,25 +266,19 @@ void GraphWindow::remove(cryomesh::spacial::Point obj) {
 				points.erase(it_objects);
 				it_objects = points.begin();
 				it_objects_end = points.end();
+				std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
+				minPoint = maxmin.first;
+				maxPoint = maxmin.second;
 			}
 			++it_objects;
 		}
 	}
 
-	const double DELTA = 0.00000001;
+	//const double DELTA = 0.00000001;
 
-	std::pair<Point, Point> maxmin;
-
-	if (((obj.getX() < maxPoint.getX() + DELTA) && (obj.getX() > maxPoint.getX() - DELTA))
-			|| ((obj.getX() < minPoint.getX() + DELTA) && (obj.getX() > minPoint.getX() - DELTA))
-			|| ((obj.getY() < maxPoint.getY() + DELTA) && (obj.getY() > maxPoint.getY() - DELTA))
-			|| ((obj.getY() < minPoint.getY() + DELTA) && (obj.getY() > minPoint.getY() - DELTA))
-			|| ((obj.getZ() < maxPoint.getZ() + DELTA) && (obj.getZ() > maxPoint.getZ() - DELTA))
-			|| ((obj.getZ() < minPoint.getZ() + DELTA) && (obj.getZ() > minPoint.getZ() - DELTA))) {
-		maxmin = this->findVirtualMaxMinPoint();
-		minPoint = maxmin.first;
-		maxPoint = maxmin.second;
-	}
+	std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
+	minPoint = maxmin.first;
+	maxPoint = maxmin.second;
 
 }
 
@@ -309,55 +324,62 @@ std::pair<Point, Point> GraphWindow::findVirtualMaxMinPoint() const {
 
 			if (it_points->getX() > max_x) {
 				max_x = it_points->getX();
-			} else if (it_points->getX() < min_x) {
+			}
+			if (it_points->getX() < min_x) {
 				min_x = it_points->getX();
 			}
 
 			if (it_points->getY() > max_y) {
 				max_y = it_points->getY();
-			} else if (it_points->getY() < min_y) {
+			}
+			if (it_points->getY() < min_y) {
 				min_y = it_points->getY();
 			}
 
 			if (it_points->getZ() > max_z) {
 				max_z = it_points->getZ();
-			} else if (it_points->getZ() < min_z) {
+			}
+			if (it_points->getZ() < min_z) {
 				min_z = it_points->getZ();
 			}
 
 			++it_points;
 		}
 	}
-	return std::pair<Point, Point>(Point(min_x, min_y, min_z), Point(max_x, max_y, max_z));
+	Point temp_min(min_x, min_y, min_z);
+	Point temp_max(max_x, max_y, max_z);
+	return std::pair<Point, Point>(temp_min, temp_max);
 }
 
-std::pair<double, double> GraphWindow::getAxisScale() const {
-	double DELTA = 0.01;
-	double scalex;
-	double scaley;
-
-	Gtk::Allocation allocation = get_allocation();
-	const int WIDTH = allocation.get_width();
-	const int HEIGHT = allocation.get_height();
-
-	double abs_miny = Maths::absolute<double>(minPoint.getY());
-	double abs_maxy = Maths::absolute<double>(maxPoint.getY());
-	double max_abs;
-	if (abs_miny > abs_maxy) {
-		max_abs = abs_miny;
-	} else {
-		max_abs = abs_maxy;
+bool GraphWindow::checkPointMaxMin(const Point & obj) const {
+	const double DELTA = 0.00001;
+	if (((obj.getX() < maxPoint.getX() + DELTA) && (obj.getX() > maxPoint.getX() - DELTA))
+			|| ((obj.getX() < minPoint.getX() + DELTA) && (obj.getX() > minPoint.getX() - DELTA))
+			|| ((obj.getY() < maxPoint.getY() + DELTA) && (obj.getY() > maxPoint.getY() - DELTA))
+			|| ((obj.getY() < minPoint.getY() + DELTA) && (obj.getY() > minPoint.getY() - DELTA))
+			|| ((obj.getZ() < maxPoint.getZ() + DELTA) && (obj.getZ() > maxPoint.getZ() - DELTA))
+			|| ((obj.getZ() < minPoint.getZ() + DELTA) && (obj.getZ() > minPoint.getZ() - DELTA))) {
+		return true;
 	}
-	if (max_abs > DELTA) {
-		scaley = static_cast<double>(HEIGHT) / max_abs;
-	} else {
-		scaley = 1;
-	}
-
-	scalex = static_cast<double>(WIDTH) / points.size();
-
-	return std::pair<double, double>(scalex, scaley);
+	return false;
 }
+
+std::ostream& operator<<(std::ostream & os, const GraphWindow & obj) {
+	const std::list<cryomesh::spacial::Point> & all_points = obj.getPoints();
+	os << "GraphWindow::operator <<: " << "" << std::endl;
+	// forall in all_points
+	{
+		std::list<cryomesh::spacial::Point>::const_iterator it_all_points = all_points.begin();
+		const std::list<cryomesh::spacial::Point>::const_iterator it_all_points_end = all_points.end();
+		while (it_all_points != it_all_points_end) {
+			os << "( " << it_all_points->getX() << ", " << it_all_points->getY() << ", " << it_all_points->getZ()
+					<< " ) ";
+			++it_all_points;
+		}
+	}
+	return os;
+}
+
 } /* namespace display */
 } /* namespace viewer */
 } /* namespace cryo */
