@@ -97,77 +97,83 @@ void ActivitiesWindow::updateNodeDisplay(bool force_recreate) {
 #ifdef ACTIVITIESWINDOW_DEBUG
 	std::cout << "ActivitiesWindow::updateNodeDisplay: " << "drawingAreas before: " << drawingAreas.size() << std::endl;
 #endif
-	if (force_recreate == true) {
+	if (cluster != 0) {
+
+		if (force_recreate == true) {
 #ifdef ACTIVITIESWINDOW_DEBUG
-		unsigned int count_added = 0;
+			unsigned int count_added = 0;
 #endif
-		drawingAreas.clear();
-		primaryInputDrawingAreas.clear();
-		primaryOutputDrawingAreas.clear();
+			drawingAreas.clear();
+			primaryInputDrawingAreas.clear();
+			primaryOutputDrawingAreas.clear();
 
-		this->deleteAllChildren(*activitiesDrawingAreasVBox);
-		this->deleteAllChildren(*activitiesPrimaryInputsDrawingAreasVBox);
-		this->deleteAllChildren(*activitiesPrimaryOutputsDrawingAreasVBox);
-		const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
+			this->deleteAllChildren(*activitiesDrawingAreasVBox);
+			this->deleteAllChildren(*activitiesPrimaryInputsDrawingAreasVBox);
+			this->deleteAllChildren(*activitiesPrimaryOutputsDrawingAreasVBox);
 
-		size_t node_overspill = all_nodes.size() + std::min(static_cast<size_t>(10), (all_nodes.size() / 100));
+			const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
 
-		drawingAreas.reserve(node_overspill);
+			size_t node_overspill = all_nodes.size() + std::min(static_cast<size_t>(10), (all_nodes.size() / 100));
 
-		// forall in all_nodes
-		{
-			std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes = all_nodes.begin();
-			const std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes_end =
-					all_nodes.end();
-			while (it_all_nodes != it_all_nodes_end) {
-				boost::shared_ptr<NodeActivityDrawingAreaPanel> panel = this->addNode(it_all_nodes->second);
+			drawingAreas.reserve(node_overspill);
+
+			// forall in all_nodes
+			{
+				std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes = all_nodes.begin();
+				const std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes_end =
+						all_nodes.end();
+				while (it_all_nodes != it_all_nodes_end) {
+					boost::shared_ptr<NodeActivityDrawingAreaPanel> panel = this->addNode(it_all_nodes->second);
 #ifdef ACTIVITIESWINDOW_DEBUG
-				boost::uuids::uuid panel_node_uuid = panel->getNode()->getUUID();
-				std::cout << "ActivitiesWindow::updateNodeDisplay: " << "Forcing recreation: new panel ( "
-				<< count_added << " of " << all_nodes.size() << " )" << " nodeid " << panel_node_uuid
-				<< std::endl;
-				assert(it_all_nodes->first == panel_node_uuid);
-				++count_added;
+					boost::uuids::uuid panel_node_uuid = panel->getNode()->getUUID();
+					std::cout << "ActivitiesWindow::updateNodeDisplay: " << "Forcing recreation: new panel ( "
+					<< count_added << " of " << all_nodes.size() << " )" << " nodeid " << panel_node_uuid
+					<< std::endl;
+					assert(it_all_nodes->first == panel_node_uuid);
+					++count_added;
 #endif
-				++it_all_nodes;
+					++it_all_nodes;
+				}
+#ifdef ACTIVITIESWINDOW_DEBUG
+				assert(count_added == all_nodes.size());
+				assert(all_nodes.size() != drawingAreas.size());
+#endif
 			}
-#ifdef ACTIVITIESWINDOW_DEBUG
-			assert(count_added == all_nodes.size());
+		} else {
+			int count_added = 0;
+
+			const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
+			// forall in all_nodes
+			{
+				std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes = all_nodes.begin();
+				const std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes_end =
+						all_nodes.end();
+				while (it_all_nodes != it_all_nodes_end) {
+					boost::shared_ptr<NodeActivityDrawingAreaPanel> found_panel = this->findNodePanelByNode(
+							it_all_nodes->second);
+
+					//if panel node doesnt exist then add it
+					if (found_panel == 0) {
+
+						boost::shared_ptr<NodeActivityDrawingAreaPanel> panel = this->addNode(it_all_nodes->second);
+
+						++count_added;
+					}
+					++it_all_nodes;
+				}
+			}
+
+			this->clearDeadPanels();
+
+			if (this->isActive() == true) {
+				mainWindow->show_all();
+			}
 			assert(all_nodes.size() != drawingAreas.size());
-#endif
+
 		}
 	} else {
-		int count_added = 0;
-
-		const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
-		// forall in all_nodes
-		{
-			std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes = all_nodes.begin();
-			const std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_nodes_end =
-					all_nodes.end();
-			while (it_all_nodes != it_all_nodes_end) {
-				boost::shared_ptr<NodeActivityDrawingAreaPanel> found_panel = this->findNodePanelByNode(
-						it_all_nodes->second);
-
-				//if panel node doesnt exist then add it
-				if (found_panel == 0) {
-
-					boost::shared_ptr<NodeActivityDrawingAreaPanel> panel = this->addNode(it_all_nodes->second);
-
-					++count_added;
-				}
-				++it_all_nodes;
-			}
-		}
-
 		this->clearDeadPanels();
-
-		if (this->isActive() == true) {
-			mainWindow->show_all();
-		}
-		assert(all_nodes.size() != drawingAreas.size());
 	}
-
 }
 
 boost::shared_ptr<NodeActivityDrawingAreaPanel> ActivitiesWindow::addNode(
@@ -362,7 +368,7 @@ void ActivitiesWindow::deleteAllChildren(Gtk::Container & container) {
 void ActivitiesWindow::clearDeadPanels() {
 	std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> > & container = drawingAreas;
 	// forall in drawingAreas
-	{
+	if (cluster!=0){
 		const std::map<boost::uuids::uuid, boost::shared_ptr<Node> > & all_nodes = cluster->getNodes();
 		const std::map<boost::uuids::uuid, boost::shared_ptr<Node> >::const_iterator it_all_node_end = all_nodes.end();
 
@@ -381,6 +387,10 @@ void ActivitiesWindow::clearDeadPanels() {
 				++it_container;
 			}
 		}
+	}else{
+		drawingAreas.clear();
+		primaryInputDrawingAreas.clear();
+		primaryOutputDrawingAreas.clear();
 	}
 }
 std::vector<boost::shared_ptr<NodeActivityDrawingAreaPanel> >::iterator ActivitiesWindow::findPanelByNodeUUID(

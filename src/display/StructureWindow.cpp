@@ -49,7 +49,7 @@ void StructureWindow::setPreserveActivityWindows(bool b) {
 }
 
 void StructureWindow::setCluster(boost::shared_ptr<cryomesh::structures::Cluster> cluster, bool activated) {
-	if ( ( selectedCluster !=0 ) && selectedCluster->getUUID() != cluster->getUUID()){
+	if ((selectedCluster != 0) && selectedCluster->getUUID() != cluster->getUUID()) {
 		currentActivitiesWindow->deactivate();
 	}
 
@@ -158,13 +158,18 @@ void StructureWindow::onStructureVisualiseButtonClicked() {
 }
 
 void StructureWindow::onStructureActivitiesToggleButtonClicked() {
-	if (structureActivitiesToggleButton->get_active() == true) {
-		if (currentActivitiesWindow == 0) {
-			currentActivitiesWindow = boost::shared_ptr < ActivitiesWindow > (new ActivitiesWindow(selectedCluster));
+	if (selectedCluster != 0) {
+		if (structureActivitiesToggleButton->get_active() == true) {
+			if (currentActivitiesWindow == 0) {
+				currentActivitiesWindow = boost::shared_ptr < ActivitiesWindow
+						> (new ActivitiesWindow(selectedCluster));
+			}
+			currentActivitiesWindow->activate();
+		} else {
+			currentActivitiesWindow->deactivate();
 		}
-		currentActivitiesWindow->activate();
 	} else {
-		currentActivitiesWindow->deactivate();
+		structureActivitiesToggleButton->set_active(false);
 	}
 }
 
