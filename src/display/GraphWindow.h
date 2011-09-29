@@ -23,7 +23,7 @@ public:
 	};
 
 	enum GraphTextDisplayProperty {
-		SHOW_MAX_TEXT = 1, SHOW_MIN_TEXT = 2, SHOW_VARIATION_TEXT = 4
+		SHOW_MAX_TEXT = 1, SHOW_MIN_TEXT = 2, SHOW_VARIATION_TEXT = 4, SHOW_AVERAGE_TEXT = 8
 	};
 
 	GraphWindow();
@@ -148,7 +148,7 @@ private:
 	/**
 	 * Find max an min and average values for x y and z in data set
 	 */
-	void  findVirtualPoints(cryomesh::spacial::Point & max_point, cryomesh::spacial::Point & min_point, cryomesh::spacial::Point & av_point) const;
+	void  findVirtualPoints(cryomesh::spacial::Point & min_point, cryomesh::spacial::Point & max_point, cryomesh::spacial::Point & av_point) const;
 
 	bool checkPointMaxMin(const cryomesh::spacial::Point & obj) const;
 

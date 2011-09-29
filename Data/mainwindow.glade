@@ -133,9 +133,6 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="GtkToggleButton" id="mainWindowToggleButtonOverview">
                 <property name="label" translatable="yes">Overview</property>
                 <property name="visible">True</property>
@@ -150,6 +147,9 @@
                 <property name="bottom_attach">2</property>
                 <property name="y_options">GTK_FILL</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>
@@ -174,7 +174,7 @@
   </object>
   <object class="GtkAdjustment" id="mainWindowRunAdjustment">
     <property name="lower">1</property>
-    <property name="upper">1000</property>
+    <property name="upper">1000000</property>
     <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>

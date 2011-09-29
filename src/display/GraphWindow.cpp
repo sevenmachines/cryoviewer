@@ -17,8 +17,8 @@ namespace cryo {
 namespace viewer {
 namespace display {
 
-const int GraphWindow::DEFAULT_GRAPH_AXIS_DISPLAY_PROPERTIES = SCALE_X | SCALE_Y | SHOW_MAX | SHOW_MIN;
-const int GraphWindow::DEFAULT_GRAPH_TEXT_DISPLAY_PROPERTIES = SHOW_MAX_TEXT | SHOW_MIN_TEXT | SHOW_VARIATION_TEXT;
+const int GraphWindow::DEFAULT_GRAPH_AXIS_DISPLAY_PROPERTIES = SCALE_X + SCALE_Y + SHOW_MAX + SHOW_MIN;
+const int GraphWindow::DEFAULT_GRAPH_TEXT_DISPLAY_PROPERTIES = SHOW_MAX_TEXT + SHOW_MIN_TEXT + SHOW_AVERAGE_TEXT+SHOW_VARIATION_TEXT;
 const int GraphWindow::DEFAULT_GRAPH_SIZE = 10;
 
 GraphWindow::GraphWindow() :
@@ -200,8 +200,17 @@ void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
 			pangoLayout->update_from_cairo_context(cr);
 			pangoLayout->add_to_cairo_context(cr);
 		}
+		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_AVERAGE_TEXT) {
+				cr->move_to(10, 50);
+				std::stringstream ss;
+				ss << "Ave: " << averagePoint.getY();
+				pangoLayout->set_text(ss.str());
+				pangoLayout->update_from_cairo_context(cr);
+				pangoLayout->add_to_cairo_context(cr);
+			}
+
 		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_VARIATION_TEXT) {
-			cr->move_to(10, 50);
+			cr->move_to(10, 70);
 			std::stringstream ss;
 			ss << "Var: " << temp_maxp - temp_minp;
 			pangoLayout->set_text(ss.str());
@@ -361,7 +370,7 @@ void GraphWindow::clear() {
 	points.clear();
 }
 
-void GraphWindow::findVirtualPoints(Point & max_point, Point & min_point, Point & av_point) const {
+void GraphWindow::findVirtualPoints(Point & min_point, Point & max_point, Point & av_point) const {
 	const double MAX_CUTOFF = 10000000;
 	double max_x = -MAX_CUTOFF;
 	double max_y = -MAX_CUTOFF;
