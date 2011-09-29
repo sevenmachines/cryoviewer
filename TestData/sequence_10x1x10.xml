@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PatternChannels SYSTEM "SequenceChannels.dtd" >
+<PatternChannels Description="" Version="">
+  <PatternChannel Depth="10" Note="" ReferenceID="1" Type="" Width="10">
+    <Pattern Binary="1000000000" Tag=""/><Pattern Binary="0100000000" Tag="" /><Pattern
+  		Binary="0010000000" Tag="" /><Pattern Binary="0001000000" Tag="" /><Pattern
+  		Binary="0000100000" Tag="" /><Pattern Binary="0000010000" Tag="" /><Pattern
+  		Binary="0000001000" Tag="" /><Pattern Binary="0000000100" Tag="" /><Pattern
+  		Binary="0000000010" Tag="" />
+  </PatternChannel>
+</PatternChannels>

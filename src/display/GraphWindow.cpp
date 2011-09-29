@@ -8,6 +8,7 @@
 #include "GraphWindow.h"
 #include "common/Maths.h"
 #include <iostream>
+#include <assert.h>
 
 using namespace cryomesh::spacial;
 using namespace cryomesh::common;
@@ -16,14 +17,16 @@ namespace cryo {
 namespace viewer {
 namespace display {
 
-const int GraphWindow::GRAPH_PROPERTIES = SCALE_X | SCALE_Y | SHOW_MAX | SHOW_MIN;
-const int GraphWindow::GRAPH_SIZE = 10;
+const int GraphWindow::DEFAULT_GRAPH_AXIS_DISPLAY_PROPERTIES = SCALE_X | SCALE_Y | SHOW_MAX | SHOW_MIN;
+const int GraphWindow::DEFAULT_GRAPH_TEXT_DISPLAY_PROPERTIES = SHOW_MAX_TEXT | SHOW_MIN_TEXT | SHOW_VARIATION_TEXT;
+const int GraphWindow::DEFAULT_GRAPH_SIZE = 10;
 
 GraphWindow::GraphWindow() :
-		graphProperties(GRAPH_PROPERTIES) {
+		graphAxisDisplayProperties(DEFAULT_GRAPH_AXIS_DISPLAY_PROPERTIES), graphTextDisplayProperties(
+				DEFAULT_GRAPH_TEXT_DISPLAY_PROPERTIES) {
 	this->clear();
-	this->setSize(GRAPH_SIZE);
-	this->set_size_request(GRAPH_SIZE, 50);
+	this->setSize(DEFAULT_GRAPH_SIZE);
+	this->set_size_request(DEFAULT_GRAPH_SIZE, 50);
 
 	graphColours.dataForeground = Gdk::Color("white");
 	graphColours.dataBackground = Gdk::Color("black");
@@ -34,6 +37,30 @@ GraphWindow::GraphWindow() :
 }
 
 GraphWindow::~GraphWindow() {
+}
+
+void GraphWindow::enableGraphAxisDisplayProperty(const GraphAxisDisplayProperty property) {
+	graphAxisDisplayProperties = graphAxisDisplayProperties | property;
+	assert((graphAxisDisplayProperties & property));
+}
+
+void GraphWindow::disableGraphAxisDisplayProperty(const GraphAxisDisplayProperty property) {
+	if (graphAxisDisplayProperties & property) {
+		graphAxisDisplayProperties = graphAxisDisplayProperties ^ property;
+	}
+	assert(!(graphAxisDisplayProperties & property));
+}
+
+void GraphWindow::enableGraphTextDisplayProperty(const GraphTextDisplayProperty property) {
+	graphTextDisplayProperties = graphTextDisplayProperties | property;
+	assert((graphTextDisplayProperties & property));
+}
+
+void GraphWindow::disableGraphTextDisplayProperty(const GraphTextDisplayProperty property) {
+	if (graphTextDisplayProperties & property) {
+		graphTextDisplayProperties = graphTextDisplayProperties ^ property;
+	}
+	assert(!(graphTextDisplayProperties & property));
 }
 
 const std::list<cryomesh::spacial::Point> & GraphWindow::getPoints() const {
@@ -51,7 +78,6 @@ bool GraphWindow::on_expose_event(GdkEventExpose* event) {
 #else
 bool GraphWindow::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
 #endif
-	std::cout << "GraphWindow::on_draw: " << "" << std::endl;
 	// background fill
 	this->setSourceRGB(cr, graphColours.dataBackground);
 	cr->paint();
@@ -64,7 +90,6 @@ bool GraphWindow::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) {
 }
 
 void GraphWindow::invalidateWindow() {
-	std::cout << "GraphWindow::invalidateWindow: " << "" << std::endl;
 	// force our program to redraw the entire clock.
 	Glib::RefPtr<Gdk::Window> win = this->get_window();
 	if (win) {
@@ -82,32 +107,35 @@ void GraphWindow::drawFramework(const Cairo::RefPtr<Cairo::Context>& cr) {
 
 	cr->save();
 
-	if (graphProperties & SHOW_MIN) {
+	if (graphAxisDisplayProperties & SHOW_MIN) {
 		cr->set_dash(std::vector<double>( { 0, 1 }), 0);
 
 		//draw min
 		cr->move_to(graphWindowAspect.minXAxis, graphWindowAspect.minYAxis);
 		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.minYAxis);
-		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
+#ifdef GRAPHWINDOW_DEBUG
+std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
 				<< graphWindowAspect.minYAxis << std::endl;
+#endif
 		// do axis marks
 		//		cr->move_to(scalex * 190, 25 + HEIGHT / 2);
 		//			cr->show_text("20");
 	}
-	if (graphProperties & SHOW_MAX) {
+	if (graphAxisDisplayProperties & SHOW_MAX) {
 		cr->set_dash(std::vector<double>( { 0, 1 }), 0);
 		//draw max
 		cr->move_to(graphWindowAspect.minXAxis, graphWindowAspect.maxYAxis);
 		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.maxYAxis);
+#ifdef GRAPHWINDOW_DEBUG
 		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
 				<< graphWindowAspect.maxYAxis << std::endl;
+#endif
 	}
 	cr->stroke();
 	cr->restore();
 }
 
 void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr) {
-	std::cout << "GraphWindow::drawGraph: " << *this << std::endl;
 	cr->save();
 
 	cr->set_line_width(2.0);
@@ -128,8 +156,10 @@ void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr) {
 		double x_point_final = scalex * (it_ps->getX() - this->minPoint.getX());
 		//double y_point_final = (0.5 * HEIGHT) - (0.5 * scaley * it_ps->getY());
 		double y_point_final = graphWindowAspect.maxYAxis - (scaley * it_ps->getY());
-		std::cout << "GraphWindow::drawGraph: " << "(" << it_ps->getX() << ", " << it_ps->getY() << ")" << " at "
+#ifdef GRAPHWINDOW_DEBUG
+	std::cout << "GraphWindow::drawGraph: " << "(" << it_ps->getX() << ", " << it_ps->getY() << ")" << " at "
 				<< "( " << x_point_final << ", " << y_point_final << ")	" << std::endl;
+#endif
 		if (count > 0) {
 			cr->line_to(x_point_final, y_point_final);
 		}
@@ -141,17 +171,46 @@ void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr) {
 }
 
 void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
-	std::cout << "GraphWindow::drawText: " << "" << std::endl;
 
-	double scalex = graphWindowAspect.scale.x;
-	double scaley = graphWindowAspect.scale.y;
+	//double scalex = graphWindowAspect.scale.x;
+	//double scaley = graphWindowAspect.scale.y;
 
 	Glib::RefPtr<Pango::Layout> pangoLayout = Pango::Layout::create(cr);
-	cr->move_to(scalex * 10, scaley * 10);
-	pangoLayout->set_text("text");
-	pangoLayout->update_from_cairo_context(cr); //gets cairo cursor position
-	pangoLayout->add_to_cairo_context(cr); //adds text to cairos stack of stuff to be drawn
+
+	// Draw optional text info labels
+	{
+		const double temp_maxp = maxPoint.getY();
+		const double temp_minp = minPoint.getY();
+		  Pango::FontDescription font_desc("sans 10");
+		pangoLayout->set_font_description(font_desc);
+
+		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_MAX_TEXT) {
+			cr->move_to(10, 10);
+			std::stringstream ss;
+			ss << "Max: "<<temp_maxp<< " / "<< graphSize;
+			pangoLayout->set_text(ss.str());
+			pangoLayout->update_from_cairo_context(cr);
+			pangoLayout->add_to_cairo_context(cr);
+		}
+		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_MIN_TEXT) {
+			cr->move_to(10, 30);
+			std::stringstream ss;
+			ss << "Min: "<<temp_minp<< " / "<< graphSize;
+			pangoLayout->set_text(ss.str());
+			pangoLayout->update_from_cairo_context(cr);
+			pangoLayout->add_to_cairo_context(cr);
+		}
+		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_VARIATION_TEXT) {
+			cr->move_to(10, 50);
+			std::stringstream ss;
+			ss << "Var: "<<temp_maxp - temp_minp;
+			pangoLayout->set_text(ss.str());
+			pangoLayout->update_from_cairo_context(cr);
+			pangoLayout->add_to_cairo_context(cr);
+		}
+	}
 	cr->stroke();
+
 }
 
 void GraphWindow::calculateWindowAspect() {
@@ -163,8 +222,10 @@ void GraphWindow::calculateWindowAspect() {
 	const int WIDTH = allocation.get_width();
 	const int HEIGHT = allocation.get_height();
 
-	graphWindowAspect.scale.x = static_cast<double>(WIDTH) /  std::max<double>(DELTA, (maxPoint.getX() - minPoint.getX()));
-	graphWindowAspect.scale.y = static_cast<double>(HEIGHT) /  std::max<double>(DELTA, (maxPoint.getY() - minPoint.getY()));
+	graphWindowAspect.scale.x = static_cast<double>(WIDTH)
+			/ std::max<double>(DELTA, (maxPoint.getX() - minPoint.getX()));
+	graphWindowAspect.scale.y = static_cast<double>(HEIGHT)
+			/ std::max<double>(DELTA, (maxPoint.getY() - minPoint.getY()));
 	graphWindowAspect.scale.z = 1.0;
 
 	graphWindowAspect.scale.x = std::max<double>(DELTA, graphWindowAspect.scale.x);
@@ -366,7 +427,7 @@ bool GraphWindow::checkPointMaxMin(const Point & obj) const {
 
 std::ostream& operator<<(std::ostream & os, const GraphWindow & obj) {
 	const std::list<cryomesh::spacial::Point> & all_points = obj.getPoints();
-	os << "GraphWindow::operator <<: " << "" << std::endl;
+	os << "GraphWindow: "<<&obj << " = " ;
 	// forall in all_points
 	{
 		std::list<cryomesh::spacial::Point>::const_iterator it_all_points = all_points.begin();

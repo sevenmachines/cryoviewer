@@ -27,7 +27,7 @@ void OverviewWindow::initialise() {
 	builder->get_widget("overviewViewportEnergy", overviewViewportEnergy);
 
 	energyGraph = boost::shared_ptr < GraphWindow > (new GraphWindow());
-
+	energyGraph->setSize(100);
 	overviewViewportEnergy->add(*energyGraph);
 	energyGraph->show();
 	this->mainWindow->set_size_request(100, -1);

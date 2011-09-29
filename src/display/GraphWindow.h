@@ -18,9 +18,14 @@ namespace display {
 class GraphWindow: public Gtk::DrawingArea {
 public:
 
-	enum GraphProperties {
+	enum GraphAxisDisplayProperty {
 		SCALE_Y = 1, SCALE_X = 2, SHOW_MIN = 4, SHOW_MAX = 8
 	};
+
+	enum GraphTextDisplayProperty {
+		SHOW_MAX_TEXT = 1, SHOW_MIN_TEXT = 2, SHOW_VARIATION_TEXT = 4
+	};
+
 	GraphWindow();
 	virtual ~GraphWindow();
 
@@ -39,18 +44,23 @@ public:
 	virtual void remove(const std::list<cryomesh::spacial::Point> & list);
 	virtual void clear();
 
+	void enableGraphAxisDisplayProperty(const GraphAxisDisplayProperty property) ;
+	void disableGraphAxisDisplayProperty(const GraphAxisDisplayProperty property) ;
+	void enableGraphTextDisplayProperty(const GraphTextDisplayProperty property) ;
+	void disableGraphTextDisplayProperty(const GraphTextDisplayProperty property) ;
+
 	/**
-		 * To stream operator
-		 *
-		 *	@param std::ostream & os
-		 *		The output stream
-		 *	@param const GraphWindow & obj
-		 *		The object to stream
-		 *
-		 *	@return std::ostream &
-		 *		The output stream
-		 */
-		friend std::ostream& operator<<(std::ostream & os, const GraphWindow & obj);
+	 * To stream operator
+	 *
+	 *	@param std::ostream & os
+	 *		The output stream
+	 *	@param const GraphWindow & obj
+	 *		The object to stream
+	 *
+	 *	@return std::ostream &
+	 *		The output stream
+	 */
+	friend std::ostream& operator<<(std::ostream & os, const GraphWindow & obj);
 
 protected:
 #ifdef ENABLE_GTK2
@@ -82,11 +92,13 @@ protected:
 
 	void setSourceRGB(Cairo::RefPtr<Cairo::Context> cr, const Gdk::Color & col);
 
-	static const int GRAPH_PROPERTIES;
-	static const int GRAPH_SIZE;
+	const static int DEFAULT_GRAPH_AXIS_DISPLAY_PROPERTIES;
+	const static int DEFAULT_GRAPH_SIZE;
+	const static int DEFAULT_GRAPH_TEXT_DISPLAY_PROPERTIES;
 
 private:
-	int graphProperties;
+	int graphAxisDisplayProperties;
+	int graphTextDisplayProperties;
 	int graphSize;
 	std::list<cryomesh::spacial::Point> points;
 
@@ -134,7 +146,7 @@ private:
 	 */
 	std::pair<cryomesh::spacial::Point, cryomesh::spacial::Point> findVirtualMaxMinPoint() const;
 
-	bool checkPointMaxMin(const cryomesh::spacial::Point & obj)const;
+	bool checkPointMaxMin(const cryomesh::spacial::Point & obj) const;
 
 	struct GraphColours {
 		Gdk::Color frameworkForeground;
