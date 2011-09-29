@@ -141,10 +141,14 @@ private:
 	cryomesh::spacial::Point minPoint;
 
 	/**
-	 * Find max an min values for x y and z in data set and return a virtual
-	 * point pair of max/min points
+		 * Point representing the average x, y and z values within the data set
+		 */
+		cryomesh::spacial::Point averagePoint;
+
+	/**
+	 * Find max an min and average values for x y and z in data set
 	 */
-	std::pair<cryomesh::spacial::Point, cryomesh::spacial::Point> findVirtualMaxMinPoint() const;
+	void  findVirtualPoints(cryomesh::spacial::Point & max_point, cryomesh::spacial::Point & min_point, cryomesh::spacial::Point & av_point) const;
 
 	bool checkPointMaxMin(const cryomesh::spacial::Point & obj) const;
 

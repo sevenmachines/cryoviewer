@@ -114,8 +114,8 @@ void GraphWindow::drawFramework(const Cairo::RefPtr<Cairo::Context>& cr) {
 		cr->move_to(graphWindowAspect.minXAxis, graphWindowAspect.minYAxis);
 		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.minYAxis);
 #ifdef GRAPHWINDOW_DEBUG
-std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
-				<< graphWindowAspect.minYAxis << std::endl;
+		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
+		<< graphWindowAspect.minYAxis << std::endl;
 #endif
 		// do axis marks
 		//		cr->move_to(scalex * 190, 25 + HEIGHT / 2);
@@ -128,7 +128,7 @@ std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.max
 		cr->line_to(graphWindowAspect.maxXAxis, graphWindowAspect.maxYAxis);
 #ifdef GRAPHWINDOW_DEBUG
 		std::cout << "GraphWindow::drawFramework: " << "minY: " << graphWindowAspect.maxXAxis << ", "
-				<< graphWindowAspect.maxYAxis << std::endl;
+		<< graphWindowAspect.maxYAxis << std::endl;
 #endif
 	}
 	cr->stroke();
@@ -157,8 +157,8 @@ void GraphWindow::drawGraph(const Cairo::RefPtr<Cairo::Context>& cr) {
 		//double y_point_final = (0.5 * HEIGHT) - (0.5 * scaley * it_ps->getY());
 		double y_point_final = graphWindowAspect.maxYAxis - (scaley * it_ps->getY());
 #ifdef GRAPHWINDOW_DEBUG
-	std::cout << "GraphWindow::drawGraph: " << "(" << it_ps->getX() << ", " << it_ps->getY() << ")" << " at "
-				<< "( " << x_point_final << ", " << y_point_final << ")	" << std::endl;
+		std::cout << "GraphWindow::drawGraph: " << "(" << it_ps->getX() << ", " << it_ps->getY() << ")" << " at "
+		<< "( " << x_point_final << ", " << y_point_final << ")	" << std::endl;
 #endif
 		if (count > 0) {
 			cr->line_to(x_point_final, y_point_final);
@@ -181,13 +181,13 @@ void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
 	{
 		const double temp_maxp = maxPoint.getY();
 		const double temp_minp = minPoint.getY();
-		  Pango::FontDescription font_desc("sans 10");
+		Pango::FontDescription font_desc("sans 10");
 		pangoLayout->set_font_description(font_desc);
 
 		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_MAX_TEXT) {
 			cr->move_to(10, 10);
 			std::stringstream ss;
-			ss << "Max: "<<temp_maxp<< " / "<< graphSize;
+			ss << "Max: " << temp_maxp << " / " << graphSize;
 			pangoLayout->set_text(ss.str());
 			pangoLayout->update_from_cairo_context(cr);
 			pangoLayout->add_to_cairo_context(cr);
@@ -195,7 +195,7 @@ void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
 		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_MIN_TEXT) {
 			cr->move_to(10, 30);
 			std::stringstream ss;
-			ss << "Min: "<<temp_minp<< " / "<< graphSize;
+			ss << "Min: " << temp_minp << " / " << graphSize;
 			pangoLayout->set_text(ss.str());
 			pangoLayout->update_from_cairo_context(cr);
 			pangoLayout->add_to_cairo_context(cr);
@@ -203,7 +203,7 @@ void GraphWindow::drawText(const Cairo::RefPtr<Cairo::Context>& cr) {
 		if (graphTextDisplayProperties & GraphTextDisplayProperty::SHOW_VARIATION_TEXT) {
 			cr->move_to(10, 50);
 			std::stringstream ss;
-			ss << "Var: "<<temp_maxp - temp_minp;
+			ss << "Var: " << temp_maxp - temp_minp;
 			pangoLayout->set_text(ss.str());
 			pangoLayout->update_from_cairo_context(cr);
 			pangoLayout->add_to_cairo_context(cr);
@@ -255,23 +255,20 @@ void GraphWindow::add(cryomesh::spacial::Point obj) {
 	points.push_back(obj);
 	if (graphSize >= 0) {
 		int size_diff = points.size() - graphSize;
-		bool need_maxmin_check = false;
+	//	bool need_maxmin_check = false;
 		while (size_diff > 0) {
 
-			const Point & temp_point = points.front();
-			if (this->checkPointMaxMin(temp_point) == true) {
-				need_maxmin_check = true;
-
-			}
+			//const Point & temp_point = points.front();
+			//	if (this->checkPointMaxMin(temp_point) == true) {
+			//		need_maxmin_check = true;
+			//	}
 			points.pop_front();
 			--size_diff;
 		}
 
-		if (need_maxmin_check == true) {
-			std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
-			minPoint = maxmin.first;
-			maxPoint = maxmin.second;
-		}
+		//if (need_maxmin_check == true) {
+		this->findVirtualPoints(this->minPoint, this->maxPoint, this->averagePoint);
+		//}
 	}
 
 	if (obj.getX() > maxPoint.getX()) {
@@ -327,9 +324,6 @@ void GraphWindow::remove(cryomesh::spacial::Point obj) {
 				points.erase(it_objects);
 				it_objects = points.begin();
 				it_objects_end = points.end();
-				std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
-				minPoint = maxmin.first;
-				maxPoint = maxmin.second;
 			}
 			++it_objects;
 		}
@@ -337,9 +331,7 @@ void GraphWindow::remove(cryomesh::spacial::Point obj) {
 
 	//const double DELTA = 0.00000001;
 
-	std::pair<Point, Point> maxmin = this->findVirtualMaxMinPoint();
-	minPoint = maxmin.first;
-	maxPoint = maxmin.second;
+	this->findVirtualPoints(this->minPoint, this->maxPoint, this->averagePoint);
 
 }
 
@@ -369,7 +361,7 @@ void GraphWindow::clear() {
 	points.clear();
 }
 
-std::pair<Point, Point> GraphWindow::findVirtualMaxMinPoint() const {
+void GraphWindow::findVirtualPoints(Point & max_point, Point & min_point, Point & av_point) const {
 	const double MAX_CUTOFF = 10000000;
 	double max_x = -MAX_CUTOFF;
 	double max_y = -MAX_CUTOFF;
@@ -377,39 +369,53 @@ std::pair<Point, Point> GraphWindow::findVirtualMaxMinPoint() const {
 	double min_x = MAX_CUTOFF;
 	double min_y = MAX_CUTOFF;
 	double min_z = MAX_CUTOFF;
+	double sum_x = 0;
+	double sum_y = 0;
+	double sum_z = 0;
+
 	// forall in point
 	{
 		std::list<cryomesh::spacial::Point>::const_iterator it_points = points.begin();
 		const std::list<cryomesh::spacial::Point>::const_iterator it_points_end = points.end();
 		while (it_points != it_points_end) {
+			const double tx = it_points->getX();
+			const double ty = it_points->getY();
+			const double tz = it_points->getZ();
 
-			if (it_points->getX() > max_x) {
-				max_x = it_points->getX();
+			sum_x += tx;
+			sum_y += ty;
+			sum_z += tz;
+
+			if (tx > max_x) {
+				max_x = tx;
 			}
-			if (it_points->getX() < min_x) {
-				min_x = it_points->getX();
+			if (tx < min_x) {
+				min_x = tx;
 			}
 
-			if (it_points->getY() > max_y) {
-				max_y = it_points->getY();
+			if (ty > max_y) {
+				max_y = ty;
 			}
-			if (it_points->getY() < min_y) {
-				min_y = it_points->getY();
+			if (ty < min_y) {
+				min_y = ty;
 			}
 
-			if (it_points->getZ() > max_z) {
-				max_z = it_points->getZ();
+			if (tz > max_z) {
+				max_z = tz;
 			}
-			if (it_points->getZ() < min_z) {
-				min_z = it_points->getZ();
+			if (tz < min_z) {
+				min_z = tz;
 			}
 
 			++it_points;
 		}
 	}
-	Point temp_min(min_x, min_y, min_z);
-	Point temp_max(max_x, max_y, max_z);
-	return std::pair<Point, Point>(temp_min, temp_max);
+
+	min_point = Point(min_x, min_y, min_z);
+	max_point = Point(max_x, max_y, max_z);
+
+	const double sz_db = static_cast<double>(points.size());
+	av_point = Point(sum_x / sz_db, sum_y / sz_db, sum_z / sz_db);
 }
 
 bool GraphWindow::checkPointMaxMin(const Point & obj) const {
@@ -427,7 +433,7 @@ bool GraphWindow::checkPointMaxMin(const Point & obj) const {
 
 std::ostream& operator<<(std::ostream & os, const GraphWindow & obj) {
 	const std::list<cryomesh::spacial::Point> & all_points = obj.getPoints();
-	os << "GraphWindow: "<<&obj << " = " ;
+	os << "GraphWindow: " << &obj << " = ";
 	// forall in all_points
 	{
 		std::list<cryomesh::spacial::Point>::const_iterator it_all_points = all_points.begin();
